@@ -1,10 +1,11 @@
 ---
-title: ""
-format: html
+title: "Some title"
+format: revealjs
 execute:
   echo: false
 ---
 
+## some title
 ```{python}
 import plotly.express as px
 
@@ -19,10 +20,27 @@ fig = px.bar(
 fig.show()
 ```
 
+## some title
+```{python}
+import plotly.express as px
+
+days = ["Monday", "Tuesday", "Wednesday"]
+sleep_hours = [8, 9, 7]
+
+fig = px.bar(
+  x = days, 
+  y = sleep_hours, 
+  title = "Hours of sleep"
+)
+fig.show()
+```
+
+## some title
 ```{python}
 print(fig)
 ```
 
+## some title
 ```{python}
 fig = px.histogram(
   data_frame = px.data.iris(),
@@ -32,6 +50,7 @@ fig = px.histogram(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.histogram(
   data_frame = px.data.iris(),
@@ -41,6 +60,7 @@ fig = px.histogram(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.histogram(
   data_frame = px.data.iris(),
@@ -50,6 +70,7 @@ fig = px.histogram(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.box(
   data_frame = px.data.iris(),
@@ -58,6 +79,7 @@ fig = px.box(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.box(
   data_frame = px.data.iris(),
@@ -68,6 +90,7 @@ fig = px.box(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.box(
   data_frame = px.data.iris(),
@@ -77,6 +100,7 @@ fig = px.box(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.box(
   data_frame = px.data.iris(),
@@ -87,6 +111,7 @@ fig = px.box(
 fig.show()
 ```
 
+## some title
 ```{python}
 import pandas as pd
 
@@ -108,6 +133,7 @@ fig = px.bar(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -124,6 +150,7 @@ fig = px.bar(
 fig.show()
 ```
 
+## some title
 ```{python}
 my_colors = {
     "Monday": "rgb(0, 0, 255)",
@@ -141,6 +168,7 @@ fig = px.box(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -153,6 +181,7 @@ fig = px.bar(
 fig.show()
 ```
 
+## some title
 ```{python}
 custom_color = [
   ("rgb(0, 0, 255)"),
@@ -170,6 +199,7 @@ fig = px.bar(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.scatter(
   data_frame = px.data.iris(),
@@ -179,6 +209,7 @@ fig = px.scatter(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.scatter(
   data_frame = px.data.iris(),
@@ -189,6 +220,7 @@ fig = px.scatter(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.scatter(
   data_frame = px.data.iris(),
@@ -200,6 +232,7 @@ fig = px.scatter(
 fig.show()
 ```
 
+## some title
 ```{python}
 fig = px.scatter(
   data_frame = px.data.iris(),
