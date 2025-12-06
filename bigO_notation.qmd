@@ -1,0 +1,171 @@
+---
+title: ""
+format: html
+execute:
+  echo: false
+---
+
+```{python}
+import plotly.express as px
+
+days = ["Monday", "Tuesday", "Wednesday"]
+sleep_hours = [8, 9, 7]
+
+fig = px.bar(
+  x = days, 
+  y = sleep_hours, 
+  title = "Hours of sleep"
+)
+fig.show()
+```
+
+```{python}
+print(fig)
+```
+
+```{python}
+fig = px.histogram(
+  data_frame = px.data.iris(),
+  x = "petal_length", 
+  nbins = 10
+)
+fig.show()
+```
+
+```{python}
+fig = px.histogram(
+  data_frame = px.data.iris(),
+  x = "petal_length", 
+  nbins = 20
+)
+fig.show()
+```
+
+```{python}
+fig = px.histogram(
+  data_frame = px.data.iris(),
+  y = "petal_length", 
+  nbins = 20
+)
+fig.show()
+```
+
+```{python}
+fig = px.box(
+  data_frame = px.data.iris(),
+  y = "petal_length"
+)
+fig.show()
+```
+
+```{python}
+fig = px.box(
+  data_frame = px.data.iris(),
+  x = "species",
+  y = "petal_length",
+  points="all"
+)
+fig.show()
+```
+
+```{python}
+fig = px.box(
+  data_frame = px.data.iris(),
+  y = "petal_length",
+  points="all"
+)
+fig.show()
+```
+
+```{python}
+fig = px.box(
+  data_frame = px.data.iris(),
+  y = "petal_length",
+  points="all",
+  hover_data=["species"]
+)
+fig.show()
+```
+
+```{python}
+import pandas as pd
+
+days = ["Monday", "Tuesday", "Wednesday"]
+sleep_hours = [8, 9, 7]
+
+sleep = pd.DataFrame({
+    "day": days,
+    "sleep_hours": sleep_hours
+})
+
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
+)
+fig.show()
+```
+
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color_discrete_map={
+    "Monday": "rgb(0, 0, 255)",
+    "Tuesday": "rgb(0, 255,0)",
+    "Wednesday": "rgb(255, 0, 0)"
+  },
+  color = "day"
+)
+fig.show()
+```
+
+```{python}
+my_colors = {
+    "Monday": "rgb(0, 0, 255)",
+    "Tuesday": "rgb(0, 255,0)",
+    "Wednesday": "rgb(255, 0, 0)"
+  }
+fig = px.box(
+  data_frame=px.data.iris(),
+  x = "species",
+  y = "petal_length",
+  title = "Hours of sleep",
+  color_discrete_map=my_colors,
+  color = "species"
+)
+fig.show()
+```
+
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color_continuous_scale = "inferno",
+  color = "sleep_hours"
+)
+fig.show()
+```
+
+```{python}
+custom_color = [
+  ("rgb(0, 0, 255)"),
+  ("rgb(0, 255,0)"),
+  ("rgb(255, 0, 0)")
+]
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color_continuous_scale = custom_color,
+  color = "sleep_hours"
+)
+fig.show()
+```

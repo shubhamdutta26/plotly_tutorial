@@ -1,0 +1,76 @@
+/*-- scss:defaults --*/
+
+@font-face {
+    font-family: 'FiraCode';
+    src: url('../../../../../fonts/FiraCode-Medium.woff2') format('woff2'),
+         url('../../../../../fonts/FiraCode-Medium.woff') format('woff');
+}
+
+$font-family-monospace: 'FiraCode';
+
+/*-- scss:rules --*/
+
+.reveal .custom-channel-name {
+  position: absolute;
+  color: #FFFFFF;
+  font-size: 1em;
+  text-align: left;
+  left: 1100px;
+  top: 150px;
+  line-height: 1em;
+}
+
+.reveal .custom-title {
+  position: absolute;
+  font-size: 4em;
+  text-align: left;
+  left: 1100px;
+  top: 225px;
+  line-height: 1em;
+}
+
+.reveal .footer {
+  font-size: 1.5em !important;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+.reveal .slide-logo {
+  height: 100px !important;
+  width: 100px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.reveal .slide-number {
+  font-size: 1.5em !important;  /* increase as needed */
+  color: #fff;  /* optional: change color */
+  top: 10px; /* optional: adjust positioning */
+}
+
+.reveal .white-text {
+  color: #FFFFFF;
+}
+
+.reveal pre {
+    background-color: transparent;
+}
+
+.reveal pre code {
+  background-color: #F2F0EF;
+  color: #000;
+  border-radius: 10px;
+  font-family: "FiraCode";
+  font-weight: "Regular";
+}
+
+.reveal div.sourceCode {
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 10px !important;
+}
+
+.reveal div.sourceCode pre code {
+  padding: 25px;
+}

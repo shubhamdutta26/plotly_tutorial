@@ -1,0 +1,35 @@
+color:
+  palette:
+    navy:         "#2D3047"
+    green:        "#2F9D72"
+    blue:         "#194F82"
+    yellow:       "#CBBA44"
+    light_yellow: "#fffbf1"
+    orange:       "#F57E5D"
+    purple:       "#58508D"
+    light_gray:   "#E2E4E6"
+    dark_gray:    "#9DA3A7"
+    charcoal:     "#434A4F"
+    black:        "#000000"
+    deep_blue:    "#194F82"
+    off_white:    "#F7F8F9"
+  background: navy
+  foreground: off_white
+  primary:    green
+
+typography:
+  fonts:
+    - family: Manrope
+      source: google
+    - family: IBM Plex Serif
+      source: google
+    - family: Fira Code
+      source: google
+  base: Manrope
+  headings: IBM Plex Serif
+  monospace:
+    family: Fira Code
+    size: 0.6em
+  monospace-inline:
+    family: Fira Code
+    size: 1.0em
