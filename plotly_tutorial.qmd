@@ -232,7 +232,7 @@ fig = px.scatter(
 fig.show()
 ```
 
-## some title
+## Scatter plot with trendline
 ```{python}
 fig = px.scatter(
   data_frame = px.data.iris(),
@@ -244,3 +244,78 @@ fig = px.scatter(
 )
 fig.show()
 ```
+
+## Line plot
+```{python}
+fig = px.line(
+  data_frame = px.data.stocks(),
+  x = "date",
+  y = "GOOG"
+)
+fig.show()
+```
+
+## Correlation plot
+
+```{python}
+iris_corr = px.data.carshare().corr(method="pearson")
+
+fig = px.imshow(
+    # Pass the correlation matrix
+    iris_corr,
+    # Show the correlation values in each cell
+    text_auto=True,
+    # Set the color scale
+    color_continuous_scale="RdYlGn",
+    # Set min and max values
+    zmin=-1, zmax=1)
+fig.show()
+```
+
+## Hover information
+
+```{python}
+fig = px.scatter(
+  data_frame = px.data.iris(),
+  x = "petal_width",
+  y = "petal_length"
+)
+fig.show()
+```
+
+## Hover information
+
+```{python}
+fig = px.scatter(
+  data_frame = px.data.iris(),
+  x = "petal_width",
+  y = "petal_length",
+  hover_data=["species"]
+)
+fig.show()
+```
+
+## Hover information with `hoverlabel`
+
+```{python}
+fig = px.scatter(
+    data_frame = px.data.iris(),
+    x = "petal_width",
+    y = "petal_length",
+    hover_data=["species"]
+)
+
+fig.update_layout(
+    hoverlabel=dict(
+        bgcolor="white",
+        font_size=16,
+        font_family="Rockwell"
+    )
+)
+
+fig.show()
+```
+
+## Plot legend
+
+## Style plot legend
