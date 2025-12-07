@@ -1,5 +1,5 @@
-import plotly.express as px
 import pandas as pd
+import plotly.express as px
 
 days = ["Monday", "Tuesday", "Wednesday"]
 sleep_hours = [8, 9, 7]

@@ -266,6 +266,21 @@ fig = px.imshow(
     # Show the correlation values in each cell
     text_auto=True,
     # Set the color scale
+    color_continuous_scale="RdYlGn")
+fig.show()
+```
+
+## Correlation plot
+
+```{python}
+iris_corr = px.data.carshare().corr(method="pearson")
+
+fig = px.imshow(
+    # Pass the correlation matrix
+    iris_corr,
+    # Show the correlation values in each cell
+    text_auto=True,
+    # Set the color scale
     color_continuous_scale="RdYlGn",
     # Set min and max values
     zmin=-1, zmax=1)
@@ -413,6 +428,77 @@ message_annotation = dict(
 )
 
 fig.update_layout(annotations=[message_annotation])
+
+fig.show()
+```
+
+## Axis labels
+
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
+)
+
+fig.update_xaxes(title_text="Day")
+fig.update_yaxes(title_text="Sleep time (hours)")
+
+fig.show()
+```
+
+## Axis labels
+
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
+)
+
+fig.update_layout(dict(
+  xaxis=dict(title = dict(text="Day")),
+  yaxis=dict(title = dict(text="Sleep time (hours)"))
+))
+
+fig.show()
+```
+
+## Axis labels
+
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
+)
+
+fig.update_layout(dict(
+  xaxis=dict(title = dict(text="Day")),
+  yaxis=dict(title = dict(text="Sleep time (hours)"),
+             range = [4, 15]
+  )
+))
+
+fig.show()
+```
+
+## Axis transformation
+
+```{python}
+fig = px.scatter(
+  data_frame = px.data.iris(),
+  x = "sepal_length",
+  y = "petal_length",
+  color="species",
+  log_y= True
+)
 
 fig.show()
 ```
