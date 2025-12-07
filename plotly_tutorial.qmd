@@ -10,7 +10,7 @@ execute:
 import plotly.express as px
 
 days = ["Monday", "Tuesday", "Wednesday"]
-sleep_hours = [8, 9, 7]
+sleep_hours = [8, 5, 10]
 
 fig = px.bar(
   x = days, 
@@ -25,7 +25,7 @@ fig.show()
 import plotly.express as px
 
 days = ["Monday", "Tuesday", "Wednesday"]
-sleep_hours = [8, 9, 7]
+sleep_hours = [8, 5, 10]
 
 fig = px.bar(
   x = days, 
@@ -116,7 +116,7 @@ fig.show()
 import pandas as pd
 
 days = ["Monday", "Tuesday", "Wednesday"]
-sleep_hours = [8, 9, 7]
+sleep_hours = [8, 5, 10]
 
 sleep = pd.DataFrame({
     "day": days,
@@ -318,4 +318,101 @@ fig.show()
 
 ## Plot legend
 
+```{python}
+fig = px.scatter(
+  data_frame = px.data.iris(),
+  x = "sepal_length",
+  y = "petal_length",
+  symbol="species",
+  color="species"
+)
+fig.show()
+```
+
 ## Style plot legend
+
+```{python}
+fig = px.scatter(
+  data_frame = px.data.iris(),
+  x = "sepal_length",
+  y = "petal_length",
+  symbol="species",
+  color="species"
+)
+
+# Create legend dictionary
+my_legend = dict(
+  x=0.2,
+  y=0.95, 
+  bgcolor="rgb(240, 229, 111)"
+)
+
+fig.update_layout(
+  showlegend=True, 
+  legend=my_legend
+)
+fig.show()
+```
+
+## Annotations
+
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
+)
+# Create the first annotation
+low = dict(
+    x="Tuesday", y=5, text="Less sleep",
+    font=dict(color="black"), showarrow=True, arrowhead=4
+)
+
+# Create the second annotation
+high = dict(
+    x="Wednesday", y=10, text="More sleep",
+    font=dict(color="black"), showarrow=True, arrowhead=4,
+)
+
+# Add annotations to the figure
+fig.update_layout(annotations=[low, high])
+
+# Show the plot
+fig.show()
+```
+
+## Annotations
+
+```{python}
+h_sleep = 8
+message_annotation = dict(
+  x="Monday", y=9,
+  # Set the format of the text and box
+  text=f"Monday: {h_sleep} hours",
+  font=dict(size=20, color="white"),
+  bgcolor="rgb(237, 64, 200)", showarrow=False
+)
+
+fig.update_layout(annotations=[message_annotation])
+
+fig.show()
+```
+
+## Annotations
+
+```{python}
+h_sleep = 8
+message_annotation = dict(
+  x=0.33, y=0.8, xref="paper", yref="paper",
+  # Set the format of the text and box
+  text=f"Monday: {h_sleep} hours",
+  font=dict(size=20, color="white"),
+  bgcolor="rgb(237, 64, 200)", showarrow=False
+)
+
+fig.update_layout(annotations=[message_annotation])
+
+fig.show()
+```
