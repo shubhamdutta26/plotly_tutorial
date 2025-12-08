@@ -502,3 +502,74 @@ fig = px.scatter(
 
 fig.show()
 ```
+
+## Subplots
+
+```{python}
+import plotly.express as px
+from plotly.subplots import make_subplots
+# Create a subplot grid
+fig = make_subplots(rows=2, cols=1)
+# Create plotly express figures
+hist = px.histogram(px.data.iris(), x='petal_length')
+box = px.box(px.data.iris(), x='petal_length')
+# Extract traces and add to subplots
+fig.add_trace(hist.data[0], row=1, col=1)
+fig.add_trace(box.data[0], row=2, col=1)
+```
+
+## Subplots
+
+```{python}
+fig = make_subplots(
+  rows=2, cols=1,
+  subplot_titles=['Histogram of petal lengths', 
+                  'Box plot of petal lengths'])
+# Create plotly express figures
+hist = px.histogram(px.data.iris(), x='petal_length')
+box = px.box(px.data.iris(), x='petal_length')
+# Extract traces and add to subplots
+fig.add_trace(hist.data[0], row=1, col=1)
+fig.add_trace(box.data[0], row=2, col=1)
+
+fig.show()
+```
+
+## Stacked subplots
+
+```{python}
+fig = make_subplots(
+    rows=3, cols=1,
+    subplot_titles=['Setosa', 'Versicolor', 'Virginica']
+)
+
+row_num = 1
+df_all = px.data.iris()
+for species in ['setosa', 'versicolor', 'virginica']:
+    df = df_all[df_all['species'] == species]
+    scatter = px.scatter(df, x='petal_length', y='sepal_length')
+    fig.add_trace(scatter.data[0], row=row_num, col=1)
+    row_num += 1
+
+fig.show()
+```
+
+## Shared axes
+
+```{python}
+fig = make_subplots(
+    rows=3, cols=1,
+    subplot_titles=['Setosa', 'Versicolor', 'Virginica'],
+    shared_xaxes=True
+)
+
+row_num = 1
+df_all = px.data.iris()
+for species in ['setosa', 'versicolor', 'virginica']:
+    df = df_all[df_all['species'] == species]
+    scatter = px.scatter(df, x='petal_length', y='sepal_length')
+    fig.add_trace(scatter.data[0], row=row_num, col=1)
+    row_num += 1
+
+fig.show()
+```
