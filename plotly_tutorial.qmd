@@ -16,6 +16,17 @@ execute:
   echo: true
 ---
 
+## Plotly
+
+-  Basics
+-  Customization
+-  Annotations
+-  Subplots
+-  Layering
+-  Buttons
+
+# Basics
+
 ## A simple bar plot
 
 ```{python}
@@ -254,6 +265,8 @@ fig = px.box(
 fig.show()
 ```
 :::
+
+# Customization
 
 ## Adding color scales
 
@@ -638,7 +651,9 @@ fig.show()
 ```
 :::
 
-## Annotations
+# Annotations
+
+## Arrows
 
 ```{python}
 fig = px.bar(
@@ -650,7 +665,7 @@ fig = px.bar(
 )
 ```
 
-## Annotations
+## Arrows
 
 :::{.detective data-detective-search="less, showarrow, arrowhead"}
 ```{python}
@@ -663,7 +678,7 @@ less = dict(
 ```
 :::
 
-## Annotations {.smaller}
+## Arrows {.smaller}
 
 :::{.detective data-detective-search="annotations"}
 ```{python}
@@ -702,7 +717,7 @@ more = dict(
 ```
 :::
 
-## Annotations {.smaller}
+## Multiple annotations {.smaller}
 
 :::{.detective data-detective-search="less, more"}
 ```{python}
@@ -720,7 +735,7 @@ fig.show()
 ```
 :::
 
-## Annotations
+## Annotations texts
 
 :::{.detective data-detective-search="text, showarrow"}
 ```{python}
@@ -738,7 +753,7 @@ msg = dict(
 ```
 :::
 
-## Annotations {.smaller}
+## Annotations texts {.smaller}
 
 :::{.detective data-detective-search="annotations"}
 ```{python}
@@ -756,7 +771,7 @@ fig.show()
 ```
 :::
 
-## Annotations
+## Annotations texts
 
 :::{.detective data-detective-search="xref, yref"}
 ```{python}
@@ -775,7 +790,7 @@ msg = dict(
 ```
 :::
 
-## Annotations {.smaller}
+## Annotations texts {.smaller}
 
 ```{python}
 fig = px.bar(
@@ -992,7 +1007,7 @@ fig.show()
 ```
 :::
 
-# Layring
+# Layering
 
 ## Layering plots
 
