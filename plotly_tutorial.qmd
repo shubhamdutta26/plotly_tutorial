@@ -1055,3 +1055,43 @@ combined_fig.add_trace(line_fig_seattle.data[0])
 combined_fig.update_layout(title='USA city temperatures')
 ```
 :::
+
+# Buttons
+
+## Creating date buttons {.smaller}
+
+```{python}
+#| output-location: default
+date_buttons = [
+{'count': 6, 'label': "6MTH", 'step': "month", 'stepmode': "todate"},
+{'count': 6, 'label': "6WTD", 'step': "day", 'stepmode': "backward"},
+{'count': 1, 'label': "YTD", 'step': "year", 'stepmode': "todate"}]
+```
+
+## Creating date buttons
+
+```{python}
+#| output-location: default
+date_buttons = [
+{'count': 6, 'label': "6MTH", 'step': "month", 'stepmode': "todate"},
+{'count': 6, 'label': "6WTD", 'step': "day", 'stepmode': "backward"},
+{'count': 1, 'label': "YTD", 'step': "year", 'stepmode': "todate"}]
+
+fig = px.line(
+  weather, 
+  x='DATE',
+  y='Boston'
+)
+```
+
+## Creating date buttons
+
+```{python}
+#| output-location: default
+fig.update_layout(dict(
+    xaxis=dict(
+      rangeselector=dict(buttons=date_buttons)
+    )))
+
+fig.show()
+```
