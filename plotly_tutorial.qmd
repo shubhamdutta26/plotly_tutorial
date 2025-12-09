@@ -2,34 +2,67 @@
 title: "Plotly tutorial"
 format:  
   revealjs:
+    slide-number: true
+    theme: theme/dsfe_theme.scss
+    code-copy: false
     output-location: column
+    code-line-numbers: false
 revealjs-plugins:
   - detective
+jupyter: python3
+highlight-style: "dracula"
+brand: brand/_dsfe_brand.yml
 execute:
   echo: true
 ---
 
 ## A simple bar plot
 
-:::{.detective data-detective-search="bar"}
 ```{python}
 import plotly.express as px
-
-days = ["Mon", "Tue", "Wed"]
-sleep_hours = [8, 5, 10]
-
-fig = px.bar(
-  x = days, 
-  y = sleep_hours
-
-)
-fig.show()
 ```
-:::
 
 ## A simple bar plot
 
-:::{.detective data-detective-search="fig.show()"}
+```{python}
+import plotly.express as px
+
+days = ["Mon", "Tue", "Wed"]
+sleep_hours = [8, 5, 10]
+```
+
+## A simple bar plot
+
+```{python}
+#| eval: false
+import plotly.express as px
+
+days = ["Mon", "Tue", "Wed"]
+sleep_hours = [8, 5, 10]
+
+fig = px.bar(
+
+
+)
+```
+
+## A simple bar plot
+
+```{python}
+#| eval: false
+import plotly.express as px
+
+days = ["Mon", "Tue", "Wed"]
+sleep_hours = [8, 5, 10]
+
+fig = px.bar(
+  x = days, 
+  y = sleep_hours
+)
+```
+
+## A simple bar plot
+
 ```{python}
 import plotly.express as px
 
@@ -39,11 +72,9 @@ sleep_hours = [8, 5, 10]
 fig = px.bar(
   x = days, 
   y = sleep_hours
-
 )
 fig.show()
 ```
-:::
 
 ## Adding a title
 
@@ -67,11 +98,26 @@ fig.show()
 
 :::{.detective data-detective-search="DataFrame"}
 ```{python}
+#| eval: false
 import pandas as pd
 
 sleep = pd.DataFrame({
-  "day": days,
-  "sleep_hours": sleep_hours
+  
+
+})
+```
+:::
+
+## A `pandas` dataframe
+
+:::{.detective data-detective-search="DataFrame"}
+```{python}
+#| eval: false
+import pandas as pd
+
+sleep = pd.DataFrame({
+  "day": ["Mon", "Tue", "Wed"],
+  "sleep_hours": [8, 5, 10]
 })
 ```
 :::
@@ -84,8 +130,8 @@ sleep = pd.DataFrame({
 import pandas as pd
 
 sleep = pd.DataFrame({
-  "days": days,
-  "sleep_hours": sleep_hours
+  "day": ["Mon", "Tue", "Wed"],
+  "sleep_hours": [8, 5, 10]
 })
 
 fig = px.bar(
@@ -103,6 +149,7 @@ fig.show()
 
 :::{.detective data-detective-search="read_csv"}
 ```{python}
+#| eval: false
 iris = pd.read_csv("data/iris.csv")
 ```
 :::
@@ -111,10 +158,11 @@ iris = pd.read_csv("data/iris.csv")
 
 :::{.detective data-detective-search="histogram"}
 ```{python}
+iris = pd.read_csv("data/iris.csv")
+
 fig = px.histogram(
   data_frame = iris,
-  x = "Petal.Length", 
-  nbins = 10
+  x = "Petal.Length",
 )
 fig.show()
 ```
@@ -125,6 +173,8 @@ fig.show()
 
 :::{.detective data-detective-search="nbins"}
 ```{python}
+iris = pd.read_csv("data/iris.csv")
+
 fig = px.histogram(
   data_frame = iris,
   x = "Petal.Length", 
@@ -138,6 +188,8 @@ fig.show()
 
 :::{.detective data-detective-search="nbins, 20"}
 ```{python}
+iris = pd.read_csv("data/iris.csv")
+
 fig = px.histogram(
   data_frame = iris,
   x = "Petal.Length", 
@@ -146,6 +198,10 @@ fig = px.histogram(
 fig.show()
 ```
 :::
+
+## Box plots
+
+Explain box plots
 
 ## Box plots
 
@@ -159,13 +215,9 @@ fig.show()
 ```
 :::
 
-## Box plots
-
-Explain box plots
-
 ## Adding points with boxplot
 
-:::{.detective data-detective-search="points, all"}
+:::{.detective data-detective-search="points"}
 ```{python}
 fig = px.box(
   data_frame = iris,
@@ -214,7 +266,7 @@ sleep = pd.DataFrame({
 })
 ```
 
-:::{.detective data-detective-search="color, day"}
+:::{.detective data-detective-search="color"}
 ```{python}
 fig = px.bar(
   data_frame = sleep,
@@ -228,7 +280,7 @@ fig.show()
 
 ## Customize color scales
 
-:::{.detective data-detective-search="color_discrete_map, Mon"}
+:::{.detective data-detective-search="color_discrete_map"}
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -249,6 +301,18 @@ fig.show()
 ## Customize color scales
 
 :::{.detective data-detective-search="my_colors"}
+```{python}
+my_colors = {
+    "Mon": "rgb(0, 0, 255)",
+    "Tue": "rgb(0, 255,0)",
+    "Wed": "rgb(255, 0, 0)"
+  }
+```
+:::
+
+## Customize color scales
+
+:::{.detective data-detective-search="color_discrete_map, my_colors"}
 ```{python}
 my_colors = {
     "Mon": "rgb(0, 0, 255)",
@@ -285,6 +349,19 @@ fig.show()
 
 ## Customize color scales {.smaller}
 
+:::{.detective data-detective-search="custom_color"}
+```{python}
+custom_color = [
+  ("rgb(0, 0, 255)"),
+  ("rgb(0, 255,0)"),
+  ("rgb(255, 0, 0)")
+]
+```
+:::
+
+## Customize color scales {.smaller}
+
+:::{.detective data-detective-search="custom_color"}
 ```{python}
 custom_color = [
   ("rgb(0, 0, 255)"),
@@ -301,6 +378,7 @@ fig = px.bar(
 )
 fig.show()
 ```
+:::
 
 ## Scatter plots
 
