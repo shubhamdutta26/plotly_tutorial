@@ -992,9 +992,13 @@ fig.show()
 ```
 :::
 
-# Layering plots {.smaller}
+# Layring
 
+## Layering plots
+
+:::{.detective data-detective-search="plotly.graph_objects, Figure"}
 ```{python}
+#| output-location: default
 from plotly.graph_objects import Figure
 
 weather = pd.read_csv("data/weather.csv")
@@ -1009,22 +1013,45 @@ line_fig = px.line(
   x='DATE', y='Houston',
   color_discrete_sequence=['green']
 )
+```
+:::
 
+## Layering plots
+
+:::{.detective data-detective-search="Figure"}
+```{python}
+#| output-location: default
+combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
+```
+:::
+
+## Layering plots
+
+:::{.detective data-detective-search="update_layout"}
+```{python}
+#| output-location: default
 combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
 combined_fig.update_layout(title='USA city temperatures')
-combined_fig.show()
 ```
+:::
 
-# Adding more layers {.smaller}
+## Adding more layers
 
 ```{python}
+#| output-location: default
 line_fig_seattle = px.line(
   weather, 
   x='DATE', y='Seattle',
   color_discrete_sequence=['orange']
 )
+```
 
+## Adding more layers
+
+:::{.detective data-detective-search="add_trace"}
+```{python}
+#| output-location: default
 combined_fig.add_trace(line_fig_seattle.data[0])
 combined_fig.update_layout(title='USA city temperatures')
-combined_fig.show()
 ```
+:::
