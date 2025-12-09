@@ -1,15 +1,57 @@
 ---
-title: "Some title"
-format: revealjs
+title: "Plotly tutorial"
+format:  
+  revealjs:
+    output-location: column
+revealjs-plugins:
+  - detective
 execute:
-  echo: false
+  echo: true
 ---
 
-## some title
+## A simple bar plot
+
+:::{.detective data-detective-search="bar"}
 ```{python}
 import plotly.express as px
 
-days = ["Monday", "Tuesday", "Wednesday"]
+days = ["Mon", "Tue", "Wed"]
+sleep_hours = [8, 5, 10]
+
+fig = px.bar(
+  x = days, 
+  y = sleep_hours
+
+)
+fig.show()
+```
+:::
+
+## A simple bar plot
+
+:::{.detective data-detective-search="fig.show()"}
+```{python}
+import plotly.express as px
+
+days = ["Mon", "Tue", "Wed"]
+sleep_hours = [8, 5, 10]
+
+fig = px.bar(
+  x = days, 
+  y = sleep_hours
+
+)
+fig.show()
+```
+:::
+
+## Adding a title
+
+:::{.detective data-detective-search="title"}
+```{python}
+import plotly.express as px
+
+days = ["Mon", "Tue", "Wed"]
 sleep_hours = [8, 5, 10]
 
 fig = px.bar(
@@ -19,121 +61,174 @@ fig = px.bar(
 )
 fig.show()
 ```
+:::
 
-## some title
+## A `pandas` dataframe
+
+:::{.detective data-detective-search="DataFrame"}
 ```{python}
-import plotly.express as px
+import pandas as pd
 
-days = ["Monday", "Tuesday", "Wednesday"]
-sleep_hours = [8, 5, 10]
+sleep = pd.DataFrame({
+  "day": days,
+  "sleep_hours": sleep_hours
+})
+```
+:::
+
+
+## A `pandas` dataframe
+
+:::{.detective data-detective-search="data_frame"}
+```{python}
+import pandas as pd
+
+sleep = pd.DataFrame({
+  "days": days,
+  "sleep_hours": sleep_hours
+})
 
 fig = px.bar(
+  data_frame = sleep,
   x = days, 
   y = sleep_hours, 
   title = "Hours of sleep"
 )
 fig.show()
 ```
+:::
 
-## some title
+
+## A histogram
+
+:::{.detective data-detective-search="read_csv"}
 ```{python}
-print(fig)
+iris = pd.read_csv("data/iris.csv")
 ```
+:::
 
-## some title
+## A histogram
+
+:::{.detective data-detective-search="histogram"}
 ```{python}
 fig = px.histogram(
-  data_frame = px.data.iris(),
-  x = "petal_length", 
+  data_frame = iris,
+  x = "Petal.Length", 
   nbins = 10
 )
 fig.show()
 ```
+:::
 
-## some title
+
+## Adjusting bin size
+
+:::{.detective data-detective-search="nbins"}
 ```{python}
 fig = px.histogram(
-  data_frame = px.data.iris(),
-  x = "petal_length", 
+  data_frame = iris,
+  x = "Petal.Length", 
+  nbins = 10
+)
+fig.show()
+```
+:::
+
+## Adjusting bin size
+
+:::{.detective data-detective-search="nbins, 20"}
+```{python}
+fig = px.histogram(
+  data_frame = iris,
+  x = "Petal.Length", 
   nbins = 20
 )
 fig.show()
 ```
+:::
 
-## some title
+## Box plots
+
+:::{.detective data-detective-search="box"}
 ```{python}
-fig = px.histogram(
-  data_frame = px.data.iris(),
-  y = "petal_length", 
-  nbins = 20
+fig = px.box(
+  data_frame = iris,
+  y = "Petal.Length",
 )
 fig.show()
 ```
+:::
 
-## some title
+## Box plots
+
+Explain box plots
+
+## Adding points with boxplot
+
+:::{.detective data-detective-search="points, all"}
 ```{python}
 fig = px.box(
-  data_frame = px.data.iris(),
-  y = "petal_length"
-)
-fig.show()
-```
-
-## some title
-```{python}
-fig = px.box(
-  data_frame = px.data.iris(),
-  x = "species",
-  y = "petal_length",
+  data_frame = iris,
+  y = "Petal.Length",
   points="all"
 )
 fig.show()
 ```
+:::
 
-## some title
+## Adjust hover data
+
+:::{.detective data-detective-search="hover_data"}
 ```{python}
 fig = px.box(
-  data_frame = px.data.iris(),
-  y = "petal_length",
-  points="all"
-)
-fig.show()
-```
-
-## some title
-```{python}
-fig = px.box(
-  data_frame = px.data.iris(),
-  y = "petal_length",
+  data_frame = iris,
+  y = "Petal.Length",
   points="all",
-  hover_data=["species"]
+  hover_data=["Species"]
 )
 fig.show()
 ```
+:::
 
-## some title
+## Boxplots
+
+:::{.detective data-detective-search="x, Species"}
 ```{python}
-import pandas as pd
+fig = px.box(
+  data_frame = iris,
+  x = "Species",
+  y = "Petal.Length"
+)
+fig.show()
+```
+:::
 
-days = ["Monday", "Tuesday", "Wednesday"]
-sleep_hours = [8, 5, 10]
+## Adding color scales
+
+```{python}
+#| echo: false
 
 sleep = pd.DataFrame({
-    "day": days,
-    "sleep_hours": sleep_hours
+  "day": days,
+  "sleep_hours": sleep_hours
 })
+```
 
+:::{.detective data-detective-search="color, day"}
+```{python}
 fig = px.bar(
-  data_frame=sleep,
+  data_frame = sleep,
   x = "day", 
   y = "sleep_hours", 
-  title = "Hours of sleep",
   color = "day"
 )
 fig.show()
 ```
+:::
 
-## some title
+## Customize color scales
+
+:::{.detective data-detective-search="color_discrete_map, Mon"}
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -141,21 +236,24 @@ fig = px.bar(
   y = "sleep_hours", 
   title = "Hours of sleep",
   color_discrete_map={
-    "Monday": "rgb(0, 0, 255)",
-    "Tuesday": "rgb(0, 255,0)",
-    "Wednesday": "rgb(255, 0, 0)"
+    "Mon": "rgb(0, 0, 255)",
+    "Tue": "rgb(0, 255,0)",
+    "Wed": "rgb(255, 0, 0)"
   },
   color = "day"
 )
 fig.show()
 ```
+:::
 
-## some title
+## Customize color scales
+
+:::{.detective data-detective-search="my_colors"}
 ```{python}
 my_colors = {
-    "Monday": "rgb(0, 0, 255)",
-    "Tuesday": "rgb(0, 255,0)",
-    "Wednesday": "rgb(255, 0, 0)"
+    "Mon": "rgb(0, 0, 255)",
+    "Tue": "rgb(0, 255,0)",
+    "Wed": "rgb(255, 0, 0)"
   }
 fig = px.box(
   data_frame=px.data.iris(),
@@ -167,8 +265,11 @@ fig = px.box(
 )
 fig.show()
 ```
+:::
 
-## some title
+## Preset colors {.smaller}
+
+:::{.detective data-detective-search="inferno"}
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -180,8 +281,10 @@ fig = px.bar(
 )
 fig.show()
 ```
+:::
 
-## some title
+## Customize color scales {.smaller}
+
 ```{python}
 custom_color = [
   ("rgb(0, 0, 255)"),
@@ -199,51 +302,63 @@ fig = px.bar(
 fig.show()
 ```
 
-## some title
+## Scatter plots
+
+:::{.detective data-detective-search="scatter"}
 ```{python}
 fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "sepal_length",
-  y = "petal_length"
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length"
 )
 fig.show()
 ```
+:::
+
+## Symbols
+
+:::{.detective data-detective-search="symbol"}
+```{python}
+fig = px.scatter(
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  symbol="Species"
+)
+fig.show()
+```
+:::
 
 ## some title
-```{python}
-fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "sepal_length",
-  y = "petal_length",
-  symbol="species"
-)
-fig.show()
-```
 
-## some title
+:::{.detective data-detective-search="symbol, color"}
 ```{python}
 fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "sepal_length",
-  y = "petal_length",
-  symbol="species",
-  color="species"
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  symbol="Species",
+  color="Species"
 )
 fig.show()
 ```
+:::
 
 ## Scatter plot with trendline
+
+:::{.detective data-detective-search="trendline, ols"}
 ```{python}
 fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "sepal_length",
-  y = "petal_length",
-  symbol="species",
-  color="species",
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  symbol="Species",
+  color="Species",
   trendline = "ols"
 )
 fig.show()
 ```
+:::
 
 ## Line plot
 ```{python}
@@ -291,9 +406,9 @@ fig.show()
 
 ```{python}
 fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "petal_width",
-  y = "petal_length"
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length"
 )
 fig.show()
 ```
@@ -302,10 +417,10 @@ fig.show()
 
 ```{python}
 fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "petal_width",
-  y = "petal_length",
-  hover_data=["species"]
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  hover_data=["Species"]
 )
 fig.show()
 ```
@@ -314,10 +429,10 @@ fig.show()
 
 ```{python}
 fig = px.scatter(
-    data_frame = px.data.iris(),
-    x = "petal_width",
-    y = "petal_length",
-    hover_data=["species"]
+    data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+    hover_data=["Species"]
 )
 
 fig.update_layout(
@@ -335,11 +450,11 @@ fig.show()
 
 ```{python}
 fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "sepal_length",
-  y = "petal_length",
-  symbol="species",
-  color="species"
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  symbol="Species",
+  color="Species"
 )
 fig.show()
 ```
