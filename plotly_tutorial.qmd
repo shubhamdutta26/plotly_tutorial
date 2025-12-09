@@ -648,61 +648,152 @@ fig = px.bar(
   title = "Hours of sleep",
   color = "day"
 )
-# Create the first annotation
-low = dict(
-    x="Tuesday", y=5, text="Less sleep",
-    font=dict(color="black"), showarrow=True, arrowhead=4
+```
+
+## Annotations
+
+:::{.detective data-detective-search="less, showarrow, arrowhead"}
+```{python}
+less = dict(
+    x="Tue", y=5, 
+    text="Less sleep",
+    font=dict(color="black"), 
+    showarrow=True, arrowhead=4
+)
+```
+:::
+
+## Annotations {.smaller}
+
+:::{.detective data-detective-search="annotations"}
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
+)
+
+fig.update_layout(annotations=[less])
+
+fig.show()
+```
+:::
+
+## Multiple annotations
+
+:::{.detective data-detective-search="more"}
+```{python}
+less = dict(
+    x="Tue", y=5, 
+    text="Less sleep",
+    font=dict(color="black"), 
+    showarrow=True, arrowhead=4
 )
 
 # Create the second annotation
-high = dict(
-    x="Wednesday", y=10, text="More sleep",
-    font=dict(color="black"), showarrow=True, arrowhead=4,
+more = dict(
+    x="Wed", y=10, 
+    text="More sleep",
+    font=dict(color="black"), 
+    showarrow=True, arrowhead=4,
+)
+```
+:::
+
+## Annotations {.smaller}
+
+:::{.detective data-detective-search="less, more"}
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
 )
 
-# Add annotations to the figure
-fig.update_layout(annotations=[low, high])
+fig.update_layout(annotations=[less, more])
 
-# Show the plot
 fig.show()
 ```
+:::
 
 ## Annotations
 
+:::{.detective data-detective-search="text, showarrow"}
 ```{python}
 h_sleep = 8
-message_annotation = dict(
-  x="Monday", y=9,
-  # Set the format of the text and box
-  text=f"Monday: {h_sleep} hours",
-  font=dict(size=20, color="white"),
-  bgcolor="rgb(237, 64, 200)", showarrow=False
+msg = dict(
+  x="Tue", y=9,
+  text=f"Mon: {h_sleep} hours",
+  font=dict(
+    size=20, 
+    color="white"
+  ),
+  bgcolor="rgb(237, 64, 200)", 
+  showarrow=False
+)
+```
+:::
+
+## Annotations {.smaller}
+
+:::{.detective data-detective-search="annotations"}
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
 )
 
-fig.update_layout(annotations=[message_annotation])
+fig.update_layout(annotations = [msg])
 
 fig.show()
 ```
+:::
 
 ## Annotations
 
+:::{.detective data-detective-search="xref, yref"}
 ```{python}
 h_sleep = 8
-message_annotation = dict(
-  x=0.33, y=0.8, xref="paper", yref="paper",
-  # Set the format of the text and box
-  text=f"Monday: {h_sleep} hours",
-  font=dict(size=20, color="white"),
-  bgcolor="rgb(237, 64, 200)", showarrow=False
+msg = dict(
+  x=0.05, y=0.9, 
+  xref="paper", yref="paper",
+  text=f"Mon: {h_sleep} hours",
+  font=dict(
+    size=20, 
+    color="white"
+  ),
+  bgcolor="rgb(237, 64, 200)", 
+  showarrow=False
+)
+```
+:::
+
+## Annotations {.smaller}
+
+```{python}
+fig = px.bar(
+  data_frame=sleep,
+  x = "day", 
+  y = "sleep_hours", 
+  title = "Hours of sleep",
+  color = "day"
 )
 
-fig.update_layout(annotations=[message_annotation])
+fig.update_layout(annotations = [msg])
 
 fig.show()
 ```
 
-## Axis labels
+## Axis labels {.smaller}
 
+:::{.detective data-detective-search="update_xaxes, update_yaxes"}
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -713,13 +804,15 @@ fig = px.bar(
 )
 
 fig.update_xaxes(title_text="Day")
-fig.update_yaxes(title_text="Sleep time (hours)")
+fig.update_yaxes(title_text="Time (hours)")
 
 fig.show()
 ```
+:::
 
-## Axis labels
+## Axis labels {.smaller}
 
+:::{.detective data-detective-search="update_layout, xaxis, yaxis"}
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -731,14 +824,16 @@ fig = px.bar(
 
 fig.update_layout(dict(
   xaxis=dict(title = dict(text="Day")),
-  yaxis=dict(title = dict(text="Sleep time (hours)"))
+  yaxis=dict(title = dict(text="Time (hours)"))
 ))
 
 fig.show()
 ```
+:::
 
-## Axis labels
+## Axis labels {.smaller}
 
+:::{.detective data-detective-search="title, range"}
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -750,95 +845,149 @@ fig = px.bar(
 
 fig.update_layout(dict(
   xaxis=dict(title = dict(text="Day")),
-  yaxis=dict(title = dict(text="Sleep time (hours)"),
-             range = [4, 15]
+  yaxis=dict(
+    title = dict(text="Time (hours)"),
+    range = [4, 15]
   )
-))
+ )
+)
 
 fig.show()
 ```
+:::
 
 ## Axis transformation
 
+:::{.detective data-detective-search="log_y"}
 ```{python}
 fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "sepal_length",
-  y = "petal_length",
-  color="species",
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  color="Species",
   log_y= True
 )
 
 fig.show()
 ```
+:::
 
-## Subplots
+# Subplots
+
+## Subplots {.smaller}
+
+:::{.detective data-detective-search="plotly.subplots, make_subplots"}
+```{python}
+import plotly.express as px
+from plotly.subplots import make_subplots
+```
+:::
+
+## Subplots {.smaller}
 
 ```{python}
 import plotly.express as px
 from plotly.subplots import make_subplots
-# Create a subplot grid
+
 fig = make_subplots(rows=2, cols=1)
-# Create plotly express figures
-hist = px.histogram(px.data.iris(), x='petal_length')
-box = px.box(px.data.iris(), x='petal_length')
-# Extract traces and add to subplots
-fig.add_trace(hist.data[0], row=1, col=1)
-fig.add_trace(box.data[0], row=2, col=1)
 ```
 
-## Subplots
+## Subplots {.smaller}
 
+:::{.detective data-detective-search="histogram, box"}
 ```{python}
-fig = make_subplots(
-  rows=2, cols=1,
-  subplot_titles=['Histogram of petal lengths', 
-                  'Box plot of petal lengths'])
-# Create plotly express figures
-hist = px.histogram(px.data.iris(), x='petal_length')
-box = px.box(px.data.iris(), x='petal_length')
-# Extract traces and add to subplots
+import plotly.express as px
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows=2, cols=1)
+
+hist = px.histogram(
+  data_frame = iris, x='Petal.Length'
+)
+
+box = px.box(
+ data_frame = iris, x='Petal.Length'
+)
+```
+:::
+
+## Subplots {.smaller}
+
+:::{.detective data-detective-search="add_trace"}
+```{python}
+import plotly.express as px
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows=2, cols=1)
+
+hist = px.histogram(
+  data_frame = iris, x='Petal.Length'
+)
+
+box = px.box(
+ data_frame = iris, x='Petal.Length'
+)
+
 fig.add_trace(hist.data[0], row=1, col=1)
 fig.add_trace(box.data[0], row=2, col=1)
 
 fig.show()
 ```
+:::
 
-## Stacked subplots
+## Stacked subplots {.smaller}
 
 ```{python}
 fig = make_subplots(
     rows=3, cols=1,
-    subplot_titles=['Setosa', 'Versicolor', 'Virginica']
+    subplot_titles=\
+      ['Setosa', 'Versicolor', 'Virginica']
 )
 
 row_num = 1
-df_all = px.data.iris()
-for species in ['setosa', 'versicolor', 'virginica']:
-    df = df_all[df_all['species'] == species]
-    scatter = px.scatter(df, x='petal_length', y='sepal_length')
-    fig.add_trace(scatter.data[0], row=row_num, col=1)
+
+for species in\
+   ['setosa', 'versicolor', 'virginica']:
+    df = iris[iris['Species'] == species]
+    scatter = px.scatter(
+      df, x='Petal.Length', y='Sepal.Length'
+    )
+    fig.add_trace(
+      scatter.data[0], 
+      row=row_num, 
+      col=1
+    )
     row_num += 1
 
 fig.show()
 ```
 
-## Shared axes
+## Shared axes {.smaller}
 
+:::{.detective data-detective-search="shared_xaxes"}
 ```{python}
 fig = make_subplots(
     rows=3, cols=1,
-    subplot_titles=['Setosa', 'Versicolor', 'Virginica'],
+    subplot_titles=\
+      ['Setosa', 'Versicolor', 'Virginica'],
     shared_xaxes=True
 )
 
 row_num = 1
-df_all = px.data.iris()
-for species in ['setosa', 'versicolor', 'virginica']:
-    df = df_all[df_all['species'] == species]
-    scatter = px.scatter(df, x='petal_length', y='sepal_length')
-    fig.add_trace(scatter.data[0], row=row_num, col=1)
+
+for species in\
+   ['setosa', 'versicolor', 'virginica']:
+    df = iris[iris['Species'] == species]
+    scatter = px.scatter(
+      df, x='Petal.Length', y='Sepal.Length'
+    )
+    fig.add_trace(
+      scatter.data[0], 
+      row=row_num, 
+      col=1
+    )
     row_num += 1
 
 fig.show()
 ```
+:::
