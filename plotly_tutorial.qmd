@@ -407,7 +407,7 @@ fig.show()
 ```
 :::
 
-## some title
+## Adding colors with symbols
 
 :::{.detective data-detective-search="symbol, color"}
 ```{python}
@@ -439,46 +439,94 @@ fig.show()
 :::
 
 ## Line plot
+
+:::{.detective data-detective-search="line"}
 ```{python}
+stocks = pd.read_csv("data/stocks.csv")
+
 fig = px.line(
-  data_frame = px.data.stocks(),
-  x = "date",
-  y = "GOOG"
+  data_frame = stocks,
+  x = "Date",
+  y = "MSFT"
 )
 fig.show()
 ```
+:::
 
 ## Correlation plot
 
+:::{.detective data-detective-search="drop"}
 ```{python}
-iris_corr = px.data.carshare().corr(method="pearson")
-
-fig = px.imshow(
-    # Pass the correlation matrix
-    iris_corr,
-    # Show the correlation values in each cell
-    text_auto=True,
-    # Set the color scale
-    color_continuous_scale="RdYlGn")
-fig.show()
+#| eval: false
+#| output-location: default
+# Remove species column from iris dataset
+iris_2 = iris.drop("Species", axis = 1)
 ```
+:::
 
 ## Correlation plot
 
+:::{.detective data-detective-search="corr"}
 ```{python}
-iris_corr = px.data.carshare().corr(method="pearson")
+#| output-location: default
+# Remove species column from iris dataset
+iris_2 = iris.drop("Species", axis = 1)
 
+iris_corr = iris_2.corr(method="pearson")
+
+print(iris_corr)
+```
+:::
+
+## Correlation plot
+
+:::{.detective data-detective-search="imshow"}
+```{python}
 fig = px.imshow(
-    # Pass the correlation matrix
-    iris_corr,
-    # Show the correlation values in each cell
-    text_auto=True,
-    # Set the color scale
-    color_continuous_scale="RdYlGn",
-    # Set min and max values
-    zmin=-1, zmax=1)
+  iris_corr,
+)
 fig.show()
 ```
+:::
+
+## Correlation plot
+
+:::{.detective data-detective-search="text_auto"}
+```{python}
+fig = px.imshow(
+  iris_corr,
+  text_auto=True,
+)
+fig.show()
+```
+:::
+
+## Correlation plot
+
+:::{.detective data-detective-search="color_continuous_scale"}
+```{python}
+fig = px.imshow(
+  iris_corr,
+  text_auto=True,
+  color_continuous_scale="RdYlGn"
+)
+fig.show()
+```
+:::
+
+## Correlation plot
+
+:::{.detective data-detective-search="zmin, zmax"}
+```{python}
+fig = px.imshow(
+  iris_corr,
+  text_auto=True,
+  color_continuous_scale="RdYlGn",
+  zmin = -1, zmax = 1
+)
+fig.show()
+```
+:::
 
 ## Hover information
 
@@ -493,6 +541,7 @@ fig.show()
 
 ## Hover information
 
+:::{.detective data-detective-search="hover_data"}
 ```{python}
 fig = px.scatter(
   data_frame = iris,
@@ -502,27 +551,49 @@ fig = px.scatter(
 )
 fig.show()
 ```
+:::
 
-## Hover information with `hoverlabel`
+## Customize hover information
 
+:::{.detective data-detective-search="update_layout"}
 ```{python}
 fig = px.scatter(
-    data_frame = iris,
+  data_frame = iris,
   x = "Sepal.Length",
   y = "Petal.Length",
-    hover_data=["Species"]
+  hover_data=["Species"]
 )
 
 fig.update_layout(
-    hoverlabel=dict(
-        bgcolor="white",
-        font_size=16,
-        font_family="Rockwell"
-    )
-)
 
+
+
+)
 fig.show()
 ```
+:::
+
+## Customize hover information
+
+:::{.detective data-detective-search="hoverlabel"}
+```{python}
+fig = px.scatter(
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  hover_data=["Species"]
+)
+
+fig.update_layout(
+  hoverlabel=dict(
+    bgcolor="white",
+    font_size=16,
+    font_family="Rockwell"
+  )
+)
+fig.show()
+```
+:::
 
 ## Plot legend
 
@@ -539,16 +610,20 @@ fig.show()
 
 ## Style plot legend
 
+:::{.detective data-detective-search="my_legend"}
 ```{python}
-fig = px.scatter(
-  data_frame = px.data.iris(),
-  x = "sepal_length",
-  y = "petal_length",
-  symbol="species",
-  color="species"
+my_legend = dict(
+  x=0.2,
+  y=0.95, 
+  bgcolor="rgb(240, 229, 111)"
 )
+```
+:::
 
-# Create legend dictionary
+## Style plot legend
+
+:::{.detective data-detective-search="showlegend, legend"}
+```{python}
 my_legend = dict(
   x=0.2,
   y=0.95, 
@@ -561,6 +636,7 @@ fig.update_layout(
 )
 fig.show()
 ```
+:::
 
 ## Annotations
 
