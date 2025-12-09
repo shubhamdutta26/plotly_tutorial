@@ -991,3 +991,40 @@ for species in\
 fig.show()
 ```
 :::
+
+# Layering plots {.smaller}
+
+```{python}
+from plotly.graph_objects import Figure
+
+weather = pd.read_csv("data/weather.csv")
+
+scatter_fig = px.scatter(
+  weather, 
+  x='DATE', y='Boston'
+)
+
+line_fig = px.line(
+  weather, 
+  x='DATE', y='Houston',
+  color_discrete_sequence=['green']
+)
+
+combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
+combined_fig.update_layout(title='USA city temperatures')
+combined_fig.show()
+```
+
+# Adding more layers {.smaller}
+
+```{python}
+line_fig_seattle = px.line(
+  weather, 
+  x='DATE', y='Seattle',
+  color_discrete_sequence=['orange']
+)
+
+combined_fig.add_trace(line_fig_seattle.data[0])
+combined_fig.update_layout(title='USA city temperatures')
+combined_fig.show()
+```
