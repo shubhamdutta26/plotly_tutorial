@@ -1083,7 +1083,7 @@ date_buttons = [
 {'count': 1, 'label': "YTD", 'step': "year", 'stepmode': "todate"}]
 ```
 
-## Creating date buttons
+## Creating date buttons {.smaller}
 
 ```{python}
 #| output-location: default
@@ -1110,3 +1110,9 @@ fig.update_layout(dict(
 
 fig.show()
 ```
+
+# Thank you
+
+::: notes
+
+:::
