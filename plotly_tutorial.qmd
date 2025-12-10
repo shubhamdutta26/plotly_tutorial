@@ -757,7 +757,13 @@ If you guys are still with me please like and subsribe to my channel. It helps m
 
 ## Hover information
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 ```{python}
+#| eval: false
+#| output-location: default
 fig = px.scatter(
   data_frame = iris,
   x = "Sepal.Length",
@@ -766,14 +772,28 @@ fig = px.scatter(
 fig.show()
 ```
 
+:::
+
+::: {.column width="50%"}
+![](images/box_3.png)
+:::
+
+::::
+
 ::: notes
 Lets take a look at this scatter plot. Hovering our mouse on any of these points we can look at the respective sepal and petal lengths. However we dont know which species the points represent.
 :::
 
 ## Hover information
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 :::{.detective data-detective-search="hover_data"}
 ```{python}
+#| eval: false
+#| output-location: default
 fig = px.scatter(
   data_frame = iris,
   x = "Sepal.Length",
@@ -784,6 +804,14 @@ fig.show()
 ```
 :::
 
+:::
+
+::: {.column width="50%"}
+![](images/box_4.png)
+:::
+
+::::
+
 ::: notes
 By setting the hover data argument to species we can now see the species information as well along with the respective sepal and petal lengths. This is pretty neat. But we can do more.
 :::
@@ -792,6 +820,7 @@ By setting the hover data argument to species we can now see the species informa
 
 :::{.detective data-detective-search="update_layout"}
 ```{python}
+#| eval: false
 fig = px.scatter(
   data_frame = iris,
   x = "Sepal.Length",
@@ -814,8 +843,14 @@ To further customize hover information we will need to use the update_layout fun
 
 ## Customize hover information
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 :::{.detective data-detective-search="hoverlabel"}
 ```{python}
+#| eval: false
+#| output-location: default
 fig = px.scatter(
   data_frame = iris,
   x = "Sepal.Length",
@@ -833,6 +868,14 @@ fig.update_layout(
 fig.show()
 ```
 :::
+
+:::
+
+::: {.column width="50%"}
+![](images/box_5.png)
+:::
+
+::::
 
 ::: notes
 We can style the hover labels using the hoverlabel argument. This takes a dictionary where we can tweak things like the font family, background color, or border. There is a more complex method called hovertemplate for full HTML control which you will be able to find in the online documentation of plotly.
