@@ -25,6 +25,12 @@ execute:
 -  Layering
 -  Buttons
 
+::: notes
+Hello everyone. Welcome to Data Science for everyone. Today we're diving into interactive visualization using Plotly in Python.
+
+I will start with the basics of plotly, the move on to customization and annotations, I will show you how to make subplots with layering and I will end by showing you how to place buttons on your plots—let's get started!
+:::
+
 # Basics
 
 ## A simple bar plot
@@ -33,17 +39,28 @@ execute:
 import plotly.express as px
 ```
 
+::: notes
+Let me start by showing you how to make a simple bar plot. We'll import plotly express using the standard alias 'px'.
+:::
+
 ## A simple bar plot
 
+:::{.detective data-detective-search="days, sleep_hours"}
 ```{python}
 import plotly.express as px
 
 days = ["Mon", "Tue", "Wed"]
 sleep_hours = [8, 5, 10]
 ```
+:::
+
+::: notes
+I have created two lists here: days and sleep hours corresponding to the days.
+:::
 
 ## A simple bar plot
 
+:::{.detective data-detective-search="bar"}
 ```{python}
 #| eval: false
 import plotly.express as px
@@ -56,9 +73,15 @@ fig = px.bar(
 
 )
 ```
+:::
+
+::: notes
+To make a simple bar plot we will call the function bar.
+:::
 
 ## A simple bar plot
 
+:::{.detective data-detective-search="x, y"}
 ```{python}
 #| eval: false
 import plotly.express as px
@@ -71,9 +94,15 @@ fig = px.bar(
   y = sleep_hours
 )
 ```
+:::
+
+::: notes
+Inside bar we will specify x and y arugments mapped to days and sleep hours respectively.
+:::
 
 ## A simple bar plot
 
+:::{.detective data-detective-search="fig.show"}
 ```{python}
 import plotly.express as px
 
@@ -86,6 +115,11 @@ fig = px.bar(
 )
 fig.show()
 ```
+:::
+
+::: notes
+As soon as we call fig.show the plot is displayed. And just like that a few simple lines of code gives us a bar chart in plotly.
+:::
 
 ## Adding a title
 
@@ -105,6 +139,10 @@ fig.show()
 ```
 :::
 
+::: notes
+To add a title to the plot, we can call the title argument inside bar and place our desired title in quotes.
+:::
+
 ## A `pandas` dataframe
 
 :::{.detective data-detective-search="DataFrame"}
@@ -117,6 +155,10 @@ sleep = pd.DataFrame({
 
 })
 ```
+:::
+
+::: notes
+A pandas dataframe can also be used in plotly. Let me show you how. We first need to import pandas as standard alias pd. Then we call the dataframe function and name it as sleep.
 :::
 
 ## A `pandas` dataframe
@@ -133,6 +175,9 @@ sleep = pd.DataFrame({
 ```
 :::
 
+::: notes
+We add two columns: day and sleep hours and include to list with each with the relevant contents as before.
+:::
 
 ## A `pandas` dataframe
 
@@ -155,14 +200,63 @@ fig.show()
 ```
 :::
 
+::: notes
+To use this dataframe inside plotly, we need to use an agrument called data underscore frame and the rest is the same as before.
+:::
+
+## Inside a `plotly` figure {.smaller}
+
+```{python}
+#| output-location: default
+print(fig)
+```
+
+::: notes
+Let's peek under the hood to understand how Plotly structures its figures. Every figure has three core components. First is layout—this dictionary holds all the styling attributes like fonts, colors, and axis properties. Each figure has exactly one layout. Next is data—this is actually a list of dictionaries that sets up the type of graph and the data to display. where each entry defines a trace. The combination of data and type is called a trace. One can have multiple traces per plot. We will look at traces later in the tutorial.
+:::
+
+## Plotly is interactive
+
+![](images/buttons.png)
+
+::: notes
+Every plot we create automatically comes with built-in interactive features on the top right hand side. When we hover over any data point, a tooltip pops up showing the exact values. These buttons let us download your plot as a static image, zoom into specific regions, pan around, select data points, and even toggle between different view modes. All of this functionality is included by default—we don't have to write a single extra line of code.
+:::
+
+# Univariate visualizations
+
+::: notes
+Now that we have learnt some basics of plotly lets look at Univariate visualization. Univariate visualizations are visualizations on datasets that have one variable. Lets focus on two most common plots types for univariate data visualizations. The first is a histogram.
+:::
+
+## A histogram
+
+```{python}
+#| echo: false
+iris = pd.read_csv("data/iris.csv")
+fig = px.histogram(
+  data_frame = iris,
+  x = "Petal.Length",
+)
+fig.show()
+```
+
+::: notes
+Histograms might look a lot like bar charts at first glance, but they group numeric values into ranges, called bins. Each bar shows how many data points fall inside a particular interval, and the bar height can represent counts or other summaries like sums or averages. Lets look at an example.
+:::
 
 ## A histogram
 
 :::{.detective data-detective-search="read_csv"}
 ```{python}
-#| eval: false
+#| output-location: default
 iris = pd.read_csv("data/iris.csv")
+print(iris.head())
 ```
+:::
+
+::: notes
+Lets bring in the iris dataset. We will use the read csv function from pandas. The iris dataset contains sepal and petal lengths of three different species of iris flowers. The link to the data is in the description below.
 :::
 
 ## A histogram
@@ -179,25 +273,13 @@ fig.show()
 ```
 :::
 
-
-## Adjusting bin size
-
-:::{.detective data-detective-search="nbins"}
-```{python}
-iris = pd.read_csv("data/iris.csv")
-
-fig = px.histogram(
-  data_frame = iris,
-  x = "Petal.Length", 
-  nbins = 10
-)
-fig.show()
-```
+::: notes
+To make a histogram we need to use the histogram function. Inside we pass in the DataFrame, pick the column we want on the x-axis; in this case petal lengths. Calling fig.show generates the histogram.
 :::
 
 ## Adjusting bin size
 
-:::{.detective data-detective-search="nbins, 20"}
+:::{.detective data-detective-search="nbins"}
 ```{python}
 iris = pd.read_csv("data/iris.csv")
 
@@ -210,9 +292,17 @@ fig.show()
 ```
 :::
 
+::: notes
+There are a few handy options you can pass to the histogram function to customize how it behaves. For example, we can change the number of bins using the nbin argument. I have set the nbins to 20.If you want even more control over binning and appearance, the Plotly documentation is a great place to explore further. We will look at customization later in the tutorial.
+:::
+
 ## Box plots
 
-Explain box plots
+![](images/buttons.png)
+
+::: notes
+Another common visualization plot for univariate data is boxplot. A boxplot squeezes a lot of distribution information into a compact shape. The main box spans from the first quartile up to the third quartile, showing the middle 50% of the data, with a line in the middle that marks the median. The whiskers extend toward the lower and upper values, but they typically stop before extreme points, which show up as separate dots and are treated as potential outliers based on a standard rule involving the interquartile range.
+:::
 
 ## Box plots
 
@@ -220,37 +310,77 @@ Explain box plots
 ```{python}
 fig = px.box(
   data_frame = iris,
-  y = "Petal.Length",
+  y = "Sepal.Width",
 )
 fig.show()
 ```
 :::
 
+::: notes
+Let’s draw a box plot for sepal width using Plotly. The function box takes our DataFrame and the column to plot, which we’ll feed into the y argument to get a vertical box. This gives a quick visual summary of typical petal lengths, the spread of the data, and any sepal that look unusually short or long.
+:::
+
 ## Adding points with boxplot
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 :::{.detective data-detective-search="points"}
 ```{python}
+#| eval: false
+#| output-location: default
 fig = px.box(
   data_frame = iris,
-  y = "Petal.Length",
+  y = "Sepal.Width",
   points="all"
 )
 fig.show()
 ```
 :::
 
+:::
+
+::: {.column width="50%"}
+![](images/box_1.png)
+:::
+
+::::
+
+::: notes
+Box plots also come with some useful options to add more context. With the points argument set to all, we can include a point plot beside the boxplot. Hovering mouse over these points tells us value of each sepal width. But there is an issue. The iris dataset contains three species of iris flowers. Hovering over each point shows us the sepal width but not the species. Lets fix that.
+:::
+
 ## Adjust hover data
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 :::{.detective data-detective-search="hover_data"}
 ```{python}
+#| eval: false
+#| output-location: default
 fig = px.box(
   data_frame = iris,
-  y = "Petal.Length",
+  y = "Sepal.Width",
   points="all",
   hover_data=["Species"]
 )
 fig.show()
 ```
+:::
+
+:::
+
+::: {.column width="50%"}
+![](images/box_2.png)
+:::
+
+::::
+
+::: notes
+With the hover_data argument, we can include extra columns so that hovering over a point reveals the corresponding species or other details. As we can see I have set the hover data argument to species. Now if we hover our mouse over any point it gives us the species name along with the sepal width values.
 :::
 
 ## Boxplots
@@ -260,10 +390,14 @@ fig.show()
 fig = px.box(
   data_frame = iris,
   x = "Species",
-  y = "Petal.Length"
+  y = "Sepal.Width"
 )
 fig.show()
 ```
+:::
+
+::: notes
+Setting x to Species we can brake down the boxplot into three species. As we can see versicolor species has the smallest sepal widths among the three species.
 :::
 
 # Customization
