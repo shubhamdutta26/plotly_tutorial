@@ -400,13 +400,16 @@ fig.show()
 Setting x to Species we can brake down the boxplot into three species. As we can see versicolor species has the smallest sepal widths among the three species.
 :::
 
-# Customization
+# Customizing colors
+
+::: notes
+Before looking at bivariate plots lets look at how we can use colors in our plots.
+:::
 
 ## Adding color scales
 
 ```{python}
 #| echo: false
-
 sleep = pd.DataFrame({
   "day": days,
   "sleep_hours": sleep_hours
@@ -423,6 +426,10 @@ fig = px.bar(
 )
 fig.show()
 ```
+:::
+
+::: notes
+Here we are looking at a bar plot we made at the beginning which tracks sleep hours for three days of the week. We have added a color argument and set it to day which will color each bar based the day. Just like that we can add colors to our plots. Plotly automatically assigns a unique color to every category in that column, or generates a gradient scale if the column is numerical. But we can customize color scales however we want.
 :::
 
 ## Customize color scales
@@ -445,6 +452,10 @@ fig.show()
 ```
 :::
 
+::: notes
+To do this, we use color_discrete_map argument. The color_discrete_map helps us set color for discrete categories. This argument expects a Python dictionary where keys match the data categories, and values are the specific colors we want. Here the data categories are days of the week, Mon, Tue, and Wed and the colors are set using the rgb strings. Here I have set them to blue, green, and red.
+:::
+
 ## Customize color scales
 
 :::{.detective data-detective-search="my_colors"}
@@ -455,6 +466,10 @@ my_colors = {
     "Wed": "rgb(255, 0, 0)"
   }
 ```
+:::
+
+::: notes
+We can also make the color dictionary separately. Here i have created the same dictionary and called it my colors.
 :::
 
 ## Customize color scales
@@ -478,32 +493,28 @@ fig.show()
 ```
 :::
 
+::: notes
+Here I have used this dictionary inside the box plot. So far we have looked at colors to map discrete variables. What if we are dealing with numbers instead of categories?
+:::
+
 ## Preset colors {.smaller}
 
 :::{.detective data-detective-search="inferno"}
 ```{python}
 fig = px.bar(
-  data_frame=sleep,
+  data_frame = sleep,
   x = "day", 
   y = "sleep_hours", 
   title = "Hours of sleep",
-  color_continuous_scale = "inferno",
+  color_continuous_scale = "Viridis",
   color = "sleep_hours"
 )
 fig.show()
 ```
 :::
 
-## Customize color scales {.smaller}
-
-:::{.detective data-detective-search="custom_color"}
-```{python}
-custom_color = [
-  ("rgb(0, 0, 255)"),
-  ("rgb(0, 255,0)"),
-  ("rgb(255, 0, 0)")
-]
-```
+::: notes
+For this, we use the color_continuous_scale argument. This lets us apply smooth gradients rather than distinct categories. Plotly has fantastic built-in scales. Let's color our chart by sleep_hours using the "Viridis" scale. It maps low sleep hour values to dark purple which is Tuesday and high sleep hour values to bright yellow which is Wednesday. You can find a huge list of these named scales in the plotly documentation online.
 :::
 
 ## Customize color scales {.smaller}
@@ -525,6 +536,16 @@ fig = px.bar(
 )
 fig.show()
 ```
+:::
+
+::: notes
+We can also make the color dictionary separately and use it with the color_continuous_scale argument.
+:::
+
+# Bivariate visualizations
+
+::: notes
+Now lets look at bivariate visualizations. Bivariate visualizations are visualizations on datasets that have two variables. Lets focus on three most common plots types for bivariate data visualizations. The first is a scatter plot.
 :::
 
 ## Scatter plots
