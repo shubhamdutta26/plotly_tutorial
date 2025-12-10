@@ -561,6 +561,10 @@ fig.show()
 ```
 :::
 
+:::notes
+Let's start with the classic scatter plot. This plot relies on a Cartesian system: we have an X-axis representing your first variable and a Y-axis for the second. Wherever those two values meet for a single data point, we place a marker. For instance, here we have a scatter plot using the scatter function that looks at sepal and petal lengths of iris flowers. We can see that as sepal length increases so does the respective petal lengths.
+:::
+
 ## Symbols
 
 :::{.detective data-detective-search="symbol"}
@@ -573,6 +577,10 @@ fig = px.scatter(
 )
 fig.show()
 ```
+:::
+
+::: notes
+Plotly lets you customize this even further. We can also map a categorical column to the 'symbol' argument. This changes the dots into squares or diamonds depending on the category. I have set it to the species."
 :::
 
 ## Adding colors with symbols
@@ -590,7 +598,11 @@ fig.show()
 ```
 :::
 
-## Scatter plot with trendline
+::: notes
+We can set the color values as well. I have set it to species along with the symbol argument. This plot has iris species mapped to both color and symbols.
+:::
+
+## Scatter plot with `trendline`
 
 :::{.detective data-detective-search="trendline, ols"}
 ```{python}
@@ -604,6 +616,10 @@ fig = px.scatter(
 )
 fig.show()
 ```
+:::
+
+::: notes
+We can overlay our plot with a trendline. Trendlines could be linear or non-linear in nature. Here we have used ols or ordinary least squares trendline which is a linear regression line. Other types of trendlines could be use as well such as lowess or moving averages.
 :::
 
 ## Line plot
@@ -621,6 +637,19 @@ fig.show()
 ```
 :::
 
+::: notes
+The second type of bivariate plot is a line plot. These are your go-to for tracking changes over a period. Line plots are simple to make using the line function in plotly. Here we are looking microsoft stocks from the stocks dataset. The x axis is set to date and y axis is set to the stock value over time.
+:::
+
+
+## Correlation plot
+
+
+::: notes
+Now, what if you want to check relationships between many variables at once? That is where correlation plots come in. For correlation plots we need a statistical parameter called the Correlation Coefficient. Ideally, it gives us a number between negative one and positive one. Explain correlation coefficient and corr function.
+:::
+
+
 ## Correlation plot
 
 :::{.detective data-detective-search="drop"}
@@ -630,6 +659,10 @@ fig.show()
 # Remove species column from iris dataset
 iris_2 = iris.drop("Species", axis = 1)
 ```
+:::
+
+::: notes
+Let's analyze a iris dataset. We want to see how petal and sepal length and widths relate to each other. The dataframe must have all numerical variables and no categorical variable. The iris dataset has one categorical variable called species. We have to remove that column first. To do that we will use the drop  function and set axis argument to 1. This removes the Species column.
 :::
 
 ## Correlation plot
@@ -646,6 +679,10 @@ print(iris_corr)
 ```
 :::
 
+::: notes
+We don't plot the raw data immediately; first, we create a correlation matrix using the corr function. We will set the method to pearson which is one of the most common correlation coefficient. This generates a grid of numbers ranging from -1 to +1 showing how strong the relationship is for every pair of variables.
+:::
+
 ## Correlation plot
 
 :::{.detective data-detective-search="imshow"}
@@ -655,6 +692,10 @@ fig = px.imshow(
 )
 fig.show()
 ```
+:::
+
+::: notes
+Numbers in a grid can be hard to read, so let's visualize it with a heatmap using the function called imshow. We pass our new correlation matrix into it. And we get a correlation matrix plot.
 :::
 
 ## Correlation plot
@@ -667,6 +708,10 @@ fig = px.imshow(
 )
 fig.show()
 ```
+:::
+
+::: notes
+Setting text_auto to True displays the actual numbers in the boxes.
 :::
 
 ## Correlation plot
@@ -682,6 +727,10 @@ fig.show()
 ```
 :::
 
+::: notes
+We can also customize colors by setting a diverging color scale, like Red-to-Yellow-to-Green using the RdYlGn preset color variable.
+:::
+
 ## Correlation plot
 
 :::{.detective data-detective-search="zmin, zmax"}
@@ -695,6 +744,12 @@ fig = px.imshow(
 fig.show()
 ```
 :::
+
+::: notes
+Additionally we can fixed the min-max values to -1 and 1 using the zmax and zmin arguments, ensuring proper color representation of correlation strength.
+:::
+
+# Customizing plots
 
 ## Hover information
 
@@ -762,6 +817,8 @@ fig.update_layout(
 fig.show()
 ```
 :::
+
+# Legends
 
 ## Plot legend
 
@@ -960,6 +1017,8 @@ fig.update_layout(annotations = [msg])
 
 fig.show()
 ```
+
+# Axes customization
 
 ## Axis labels {.smaller}
 
