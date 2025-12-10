@@ -883,6 +883,10 @@ We can style the hover labels using the hoverlabel argument. This takes a dictio
 
 # Legends
 
+::: notes
+Now let's look at legends. A legend is essentially the plot key—it decodes the symbols or colors we're using. If we color-code our plot, Plotly is smart enough to generate a legend automatically.
+:::
+
 ## Plot legend
 
 ```{python}
@@ -896,6 +900,10 @@ fig = px.scatter(
 fig.show()
 ```
 
+::: notes
+Lets look at this plot. As you can see plotly automatically creates legend based on color and symbol mapped to individual species for the iris dataset. The legend is placed outside the plot. Let me show you how to bring it inside the plot.
+:::
+
 ## Style plot legend
 
 :::{.detective data-detective-search="my_legend"}
@@ -906,6 +914,26 @@ my_legend = dict(
   bgcolor="rgb(240, 229, 111)"
 )
 ```
+:::
+
+::: notes
+First we create a legend dictionary called my_legend.
+:::
+
+## Style plot legend
+
+:::{.detective data-detective-search="x, y, bgcolor"}
+```{python}
+my_legend = dict(
+  x=0.2,
+  y=0.95, 
+  bgcolor="rgb(240, 229, 111)"
+)
+```
+:::
+
+::: notes
+To position it, we use the legend dictionary with x and y coordinates. These aren't pixels; they are normalized coordinates between 0 and 1. We can also set a background color. As always, the documentation has a full list of properties that you can look at.
 :::
 
 ## Style plot legend
@@ -924,6 +952,10 @@ fig.update_layout(
 )
 fig.show()
 ```
+:::
+
+::: notes
+As before we can use the update_layout function to modify the legend properties. We can also turn the legends on or off using the showlegend argument.
 :::
 
 # Annotations
