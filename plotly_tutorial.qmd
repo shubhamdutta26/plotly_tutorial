@@ -1541,7 +1541,34 @@ Then we use the add_trace function to add the seattle plot to our preexisting fi
 # Buttons
 
 ::: notes
+With that we move to the last part of our tutorial on plotly. Lets learn how to add interactivity to our plots by using buttons.
+:::
 
+## Time buttons
+
+![](images/google.png)
+
+::: notes
+Time buttons can be added to line charts to filter or zoom in on a specific time slice. We can see common time buttons on most stock websites, like this chart showing the stock prices for google. For example, 1D shows data for the last day, 1M for the previous month, 1Y for the last year, and YTD shows the year-to-date.
+:::
+
+## Time buttons in Plotly
+
+-  `label` = Text on the button the user clicks on
+
+. . .
+
+-  `count` = How many steps to take
+-  `step` = time period (month, day, year)
+
+. . .
+
+-  `stepmode`:
+    +  `todate` = start of the next full time period
+    +  `backward` = moves back by the `count`
+
+::: notes
+Technically speaking, a button in Plotly is just a Python dictionary with four main ingredients. First, we need a label, which is simply the text the user clicks on. Then we have count and step, which work together to define the duration—like taking "1" step of a "year". Finally, there is stepmode. This one is the secret sauce. It controls exactly how the timeline snaps into place using either 'backward' or 'todate'.
 :::
 
 ## Creating date buttons {.smaller}
@@ -1549,13 +1576,12 @@ Then we use the add_trace function to add the seattle plot to our preexisting fi
 ```{python}
 #| output-location: default
 date_buttons = [
-{'count': 6, 'label': "6MTH", 'step': "month", 'stepmode': "todate"},
-{'count': 6, 'label': "6WTD", 'step': "day", 'stepmode': "backward"},
-{'count': 1, 'label': "YTD", 'step': "year", 'stepmode': "todate"}]
+  {'label': "6MTH", 'count': 6, 'step': "month", 'stepmode': "todate"},
+]
 ```
 
 ::: notes
-
+Lets create a button. Here were are creating a 6 month botton. We specify the label, count to 6 and step to month. We set the stepmode to 'todate' which means that it will snap the range to the final six months.
 :::
 
 ## Creating date buttons {.smaller}
@@ -1563,9 +1589,25 @@ date_buttons = [
 ```{python}
 #| output-location: default
 date_buttons = [
-{'count': 6, 'label': "6MTH", 'step': "month", 'stepmode': "todate"},
-{'count': 6, 'label': "6WTD", 'step': "day", 'stepmode': "backward"},
-{'count': 1, 'label': "YTD", 'step': "year", 'stepmode': "todate"}]
+  {'label': "6MTH", 'count': 6, 'step': "month", 'stepmode': "todate"},
+  {'label': "6WTD", 'count': 6, 'step': "day",   'stepmode': "backward"},
+  {'label': "YTD",  'count': 1, 'step': "year",  'stepmode': "todate"}
+]
+```
+
+::: notes
+Here I have created two more buttons. One for 6 days backward in time and the other is year to date. Lets see how we can integrate these buttons to our plot.
+:::
+
+## Creating date buttons {.smaller}
+
+```{python}
+#| output-location: default
+date_buttons = [
+  {'label': "6MTH", 'count': 6, 'step': "month", 'stepmode': "todate"},
+  {'label': "6WTD", 'count': 6, 'step': "day",   'stepmode': "backward"},
+  {'label': "YTD",  'count': 1, 'step': "year",  'stepmode': "todate"}
+]
 
 fig = px.line(
   weather, 
@@ -1575,13 +1617,15 @@ fig = px.line(
 ```
 
 ::: notes
-
+We first generate our line plot with the weather data for Boston from the weather data.
 :::
 
 ## Creating date buttons
 
+:::{.detective data-detective-search="rangeselector"}
 ```{python}
-#| output-location: default
+#| output-location: slide
+#| echo: false
 fig.update_layout(dict(
     xaxis=dict(
       rangeselector=dict(buttons=date_buttons)
@@ -1589,13 +1633,14 @@ fig.update_layout(dict(
 
 fig.show()
 ```
+:::
 
 ::: notes
-
+Now we merge the buttons and the plot together. To inject the buttons, we access the update_layout method. Inside there, we target the xaxis and specifically the rangeselector property. We simply pass our list of button dictionaries into the buttons argument, and Plotly handles the rendering logic for us.
 :::
 
 # Thank you
 
 ::: notes
-
+Thats it. With that we come to the end of our tutorial on plotly. Please like, comment and subscribe to my channel if you are learning from my videos. See you in the next one.
 :::
