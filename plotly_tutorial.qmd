@@ -960,6 +960,19 @@ As before we can use the update_layout function to modify the legend properties.
 
 # Annotations
 
+::: notes
+Now lets talk about Annotations. Annotations are bits of text you place directly on top of your figure to add context or highlight something important.
+:::
+
+## Adding annotations
+
+- `add_annotation`
+- `update_layout`
+
+::: notes
+In Plotly, there are two main ways to add annotations. You can attach them one by one with the add_annotation method, or you can set them all at once through update_layout using the annotations argument, which expects a list of annotation dictionaries. In this lesson, the focus will stay on update_layout, because it keeps all of the layout-related pieces—titles, axes, and annotations—in one place.
+:::
+
 ## Arrows
 
 ```{python}
@@ -972,6 +985,10 @@ fig = px.bar(
 )
 ```
 
+::: notes
+Lets look at this bar plot. Lets say we want to hightlight the bar with the least sleep hours which is on Tuesday.
+:::
+
 ## Arrows
 
 :::{.detective data-detective-search="less, showarrow, arrowhead"}
@@ -983,6 +1000,10 @@ less = dict(
     showarrow=True, arrowhead=4
 )
 ```
+:::
+
+::: notes
+To that end, we will create a dictionary called less and inside we will set the position of the annotations using x and y argument, add text using the text argument along with the font color. We will also tell plotly to draw an arrow to point to the annotation using the showarrow and arrowhead arguments.
 :::
 
 ## Arrows {.smaller}
@@ -1001,6 +1022,10 @@ fig.update_layout(annotations=[less])
 
 fig.show()
 ```
+:::
+
+::: notes
+Now we can update our plot using the annotations argument which takes a list of annotations. In our case we only have one annotation named less.
 :::
 
 ## Multiple annotations
@@ -1024,6 +1049,10 @@ more = dict(
 ```
 :::
 
+::: notes
+We can add multiple annotations as well. Here in addition to the first annotation we have created a second annotation called more which will point to the day with the most number of sleep hours.
+:::
+
 ## Multiple annotations {.smaller}
 
 :::{.detective data-detective-search="less, more"}
@@ -1040,6 +1069,10 @@ fig.update_layout(annotations=[less, more])
 
 fig.show()
 ```
+:::
+
+::: notes
+To display both annotations we will add both less and more to the list. As you can see it is very simple to add annotations to plotly charts.
 :::
 
 ## Annotations texts
@@ -1060,6 +1093,10 @@ msg = dict(
 ```
 :::
 
+::: notes
+Here is another example of annotation text but this time without an arrow. I have made other modifications as you can see. For example I have used a fstring for the annotation text. I have also added a background color.
+:::
+
 ## Annotations texts {.smaller}
 
 :::{.detective data-detective-search="annotations"}
@@ -1078,13 +1115,17 @@ fig.show()
 ```
 :::
 
+::: notes
+This is what the annotation text looks like on the bar plot.
+:::
+
 ## Annotations texts
 
 :::{.detective data-detective-search="xref, yref"}
 ```{python}
 h_sleep = 8
 msg = dict(
-  x=0.05, y=0.9, 
+  x=0.5, y=0.5, 
   xref="paper", yref="paper",
   text=f"Mon: {h_sleep} hours",
   font=dict(
@@ -1095,6 +1136,10 @@ msg = dict(
   showarrow=False
 )
 ```
+:::
+
+::: notes
+By default, x and y for an annotation are in data units, so the label moves with that point on the axes. If instead we set xref and yref arguments to 'paper', Plotly switches to a normalized coordinate system where 0 is one edge of the plotting area and 1 is the opposite edge. As you can see I have used x=0.5 and y=0.5 which is the center of the plot.
 :::
 
 ## Annotations texts {.smaller}
@@ -1112,6 +1157,9 @@ fig.update_layout(annotations = [msg])
 
 fig.show()
 ```
+::: notes
+This places the text right in the middle of the plot region, independent of the underlying data values.
+:::
 
 # Axes customization
 
