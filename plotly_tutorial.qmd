@@ -1270,6 +1270,10 @@ Lets look at axis transformation. There are several ways to transform axes. Here
 
 # Subplots
 
+::: notes
+Next, lets learn how to create subplots. Think of a subplot as a dashboard. Instead of showing a single chart in isolation, we create a grid. This allows us to place multiple visualizations side-by-side. 
+:::
+
 ## Subplots {.smaller}
 
 :::{.detective data-detective-search="plotly.subplots, make_subplots"}
@@ -1280,10 +1284,10 @@ from plotly.subplots import make_subplots
 :::
 
 ::: notes
-
+To create subplots, we will need to import the make subplots package from plotly.subplots.
 :::
 
-## Subplots {.smaller}
+## Create a grid {.smaller}
 
 ```{python}
 import plotly.express as px
@@ -1293,11 +1297,28 @@ fig = make_subplots(rows=2, cols=1)
 ```
 
 ::: notes
+Next we call the make subplots function to create a grid. We can set up a 2-by-2 grid, a 1-by-3, or really any configuration we need. Just remember, the more panels we add, the smaller each one gets. Here we are creating a grid of 2 rows and 1 column.
+:::
 
+## Trace {.smaller}
+
+```{python}
+#| output-location: default
+fig = px.scatter(
+  data_frame = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  color="Species")
+fig.data
+```
+
+::: notes
+Before we build the grid, we need a quick refresher on 'traces' which I had discussed in the beginning of this video. In Plotly, a 'trace' is the actual drawing—the line, the bar, or the scatter points inside the figure. It holds the data and the style instructions. If we inspect a figure’s structure using the .data attribute, you get a tuple of these trace objects. We can grab them individually using index zero, index one, and so on. This is crucial because when we build subplots, we use the .add_trace() command to manually place these objects into specific slots on our grid
 :::
 
 ## Subplots {.smaller}
 
+::: fragment
 :::{.detective data-detective-search="histogram, box"}
 ```{python}
 import plotly.express as px
@@ -1314,14 +1335,15 @@ box = px.box(
 )
 ```
 :::
+:::
 
 ::: notes
-
+Now that we understand trace, lets make two plots. First, we import plotly.express and make_subplots. We initialize our canvas with two rows and a single column. Now, we generate two separate charts:  One is a histogram and the other is a box plot. These are stored in hist and box variables respectively. These exist as independent figures right now.
 :::
 
 ## Subplots {.smaller}
 
-:::{.detective data-detective-search="add_trace"}
+:::{.detective data-detective-search="add_trace, data"}
 ```{python}
 import plotly.express as px
 from plotly.subplots import make_subplots
@@ -1344,7 +1366,21 @@ fig.show()
 :::
 
 ::: notes
+To merge them, we use add_trace to pull the trace from the histogram using .data[0] and insert it into row one. We do the same for the second figure, which is the box plot, placing it in row two.  Now we have a vertical dashboard showing the petal lengths in two different ways.
+:::
 
+## Stacked subplots {.smaller}
+
+```{python}
+fig = make_subplots(
+    rows=3, cols=1,
+    subplot_titles=\
+      ['Setosa', 'Versicolor', 'Virginica']
+)
+```
+
+::: notes
+Now let's try something more advanced. Suppose we want to separate plot for each iris flower species: setosa, versicolor, and virginica. Instead of writing code three times, we set up a grid with 3 row and 1 columns. For individual subplot titles we input a list of the three species to the subplot titles argument. We loop through our list of star types, filter the dataframe for that specific star, and generate a scatter plot. Inside the loop, we add that scatter trace to the correct column. It works, but notice how the axes are all scaled differently? It makes direct comparison pretty tricky."
 :::
 
 ## Stacked subplots {.smaller}
@@ -1360,10 +1396,13 @@ row_num = 1
 
 for species in\
    ['setosa', 'versicolor', 'virginica']:
+   # Filter individual species
     df = iris[iris['Species'] == species]
+    # Make separate scatter plots
     scatter = px.scatter(
       df, x='Petal.Length', y='Sepal.Length'
     )
+    # Add trace
     fig.add_trace(
       scatter.data[0], 
       row=row_num, 
@@ -1375,7 +1414,7 @@ fig.show()
 ```
 
 ::: notes
-
+Then, We loop through our list of iris species, filter the dataframe for that specific species and store it in the variable df and generate separate scatter plots for each species. Inside the loop, we add that scatter trace to the correct row by incrementing the row_num value. And we get a nice scatter plot. One thing to note is the x-axes are all scaled differently. This makes direct comparison difficult. Lets fix this.
 :::
 
 ## Shared axes {.smaller}
@@ -1409,7 +1448,7 @@ fig.show()
 :::
 
 ::: notes
-
+To do this, we can lock the axes together. When we initialize the grid, we simply add the argument shared_xaxes=True. This forces every plot in the row to use the exact same vertical scale. Now, when we look at the plot we can see that petal length of setosa is much smaller compared to the other two species.
 :::
 
 # Layering
