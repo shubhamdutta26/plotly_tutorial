@@ -1454,7 +1454,7 @@ To do this, we can lock the axes together. When we initialize the grid, we simpl
 # Layering
 
 ::: notes
-
+Now that we understand subplots, we will look at layering. This is different from making subplots where charts sit next to each other in a grid. Here, we are talking about superimposing different graphs on the exact same canvas. To make this happen, we rely on the add_trace() function, which we have covered before.
 :::
 
 ## Layering plots
@@ -1465,7 +1465,19 @@ To do this, we can lock the axes together. When we initialize the grid, we simpl
 from plotly.graph_objects import Figure
 
 weather = pd.read_csv("data/weather.csv")
+print(weather.head())
+```
+:::
 
+::: notes
+For layering we will import figure from plotly.graph_objects. We will use a new dataset called weather which contains temperatures of three cites in the US.
+:::
+
+## Layering plots
+
+:::{.detective data-detective-search="plotly.graph_objects, Figure"}
+```{python}
+#| output-location: default
 scatter_fig = px.scatter(
   weather, 
   x='DATE', y='Boston'
@@ -1480,7 +1492,7 @@ line_fig = px.line(
 :::
 
 ::: notes
-
+Next we generate two plots: one is a scatter plot for Boston and the other is a line plot for Houston.
 :::
 
 ## Layering plots
@@ -1489,25 +1501,12 @@ line_fig = px.line(
 ```{python}
 #| output-location: default
 combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
-```
-:::
-
-::: notes
-
-:::
-
-## Layering plots
-
-:::{.detective data-detective-search="update_layout"}
-```{python}
-#| output-location: default
-combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
 combined_fig.update_layout(title='USA city temperatures')
 ```
 :::
 
 ::: notes
-
+Finally, we fuse them together by creating a new combined figure that unpacks the data from both the scatter and line charts using the star operator.
 :::
 
 ## Adding more layers
@@ -1522,7 +1521,7 @@ line_fig_seattle = px.line(
 ```
 
 ::: notes
-
+We don't always have to build everything at once. Sometimes we might have an existing chart and we want to add a new metric onto it later. Lets add the seattle weather to our figure. As always we make a new line chart with the seattle weather.
 :::
 
 ## Adding more layers
@@ -1536,7 +1535,7 @@ combined_fig.update_layout(title='USA city temperatures')
 :::
 
 ::: notes
-
+Then we use the add_trace function to add the seattle plot to our preexisting figure. Finally we will use the update layout function to generate the new figure.
 :::
 
 # Buttons
