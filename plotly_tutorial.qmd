@@ -1163,6 +1163,10 @@ This places the text right in the middle of the plot region, independent of the 
 
 # Axes customization
 
+::: notes
+Now lets move on to axis customization and transformation.
+:::
+
 ## Axis labels {.smaller}
 
 :::{.detective data-detective-search="update_xaxes, update_yaxes"}
@@ -1180,6 +1184,10 @@ fig.update_yaxes(title_text="Time (hours)")
 
 fig.show()
 ```
+:::
+
+::: notes
+For this walkthrough, we will look at the sleep bar plot. The data is tidy enough for analysis, but the column names are still a bit “raw” and not ideal for a polished chart. Lets fix them. We will use update_xaxes and update_yaxes functions to rename the x and y axes respectively. These functions has an argument called title_text that can be used to modify axes labels.
 :::
 
 ## Axis labels {.smaller}
@@ -1203,9 +1211,14 @@ fig.show()
 ```
 :::
 
-## Axis labels {.smaller}
+::: notes
+We can also use the update_layout function to rename our axes. It takes a dictionary of x and yaxis titles as shown here.
+The update_layout pattern is handy, because you can control several visual elements of the figure from one place.
+:::
 
-:::{.detective data-detective-search="title, range"}
+## Axis limits {.smaller}
+
+:::{.detective data-detective-search="tickangle, range"}
 ```{python}
 fig = px.bar(
   data_frame=sleep,
@@ -1216,7 +1229,10 @@ fig = px.bar(
 )
 
 fig.update_layout(dict(
-  xaxis=dict(title = dict(text="Day")),
+  xaxis=dict(
+    title = dict(text="Day"),
+    tickangle=-30
+  ),
   yaxis=dict(
     title = dict(text="Time (hours)"),
     range = [4, 15]
@@ -1226,6 +1242,10 @@ fig.update_layout(dict(
 
 fig.show()
 ```
+:::
+
+::: notes
+The axis limits along with several other properties can be customized using the update_layout function. Here I have angled x axis tick labels using the tickangle argument. And I have modified the range of the y axis from 4 to 15.
 :::
 
 ## Axis transformation
@@ -1244,6 +1264,10 @@ fig.show()
 ```
 :::
 
+::: notes
+Lets look at axis transformation. There are several ways to transform axes. Here I am transforming the y axes to log by setting the log_y argument to true.
+:::
+
 # Subplots
 
 ## Subplots {.smaller}
@@ -1255,6 +1279,10 @@ from plotly.subplots import make_subplots
 ```
 :::
 
+::: notes
+
+:::
+
 ## Subplots {.smaller}
 
 ```{python}
@@ -1263,6 +1291,10 @@ from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=2, cols=1)
 ```
+
+::: notes
+
+:::
 
 ## Subplots {.smaller}
 
@@ -1281,6 +1313,10 @@ box = px.box(
  data_frame = iris, x='Petal.Length'
 )
 ```
+:::
+
+::: notes
+
 :::
 
 ## Subplots {.smaller}
@@ -1305,6 +1341,10 @@ fig.add_trace(box.data[0], row=2, col=1)
 
 fig.show()
 ```
+:::
+
+::: notes
+
 :::
 
 ## Stacked subplots {.smaller}
@@ -1333,6 +1373,10 @@ for species in\
 
 fig.show()
 ```
+
+::: notes
+
+:::
 
 ## Shared axes {.smaller}
 
@@ -1364,7 +1408,15 @@ fig.show()
 ```
 :::
 
+::: notes
+
+:::
+
 # Layering
+
+::: notes
+
+:::
 
 ## Layering plots
 
@@ -1388,6 +1440,10 @@ line_fig = px.line(
 ```
 :::
 
+::: notes
+
+:::
+
 ## Layering plots
 
 :::{.detective data-detective-search="Figure"}
@@ -1395,6 +1451,10 @@ line_fig = px.line(
 #| output-location: default
 combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
 ```
+:::
+
+::: notes
+
 :::
 
 ## Layering plots
@@ -1405,6 +1465,10 @@ combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
 combined_fig = Figure(data=[*scatter_fig.data, *line_fig.data])
 combined_fig.update_layout(title='USA city temperatures')
 ```
+:::
+
+::: notes
+
 :::
 
 ## Adding more layers
@@ -1418,6 +1482,10 @@ line_fig_seattle = px.line(
 )
 ```
 
+::: notes
+
+:::
+
 ## Adding more layers
 
 :::{.detective data-detective-search="add_trace"}
@@ -1428,7 +1496,15 @@ combined_fig.update_layout(title='USA city temperatures')
 ```
 :::
 
+::: notes
+
+:::
+
 # Buttons
+
+::: notes
+
+:::
 
 ## Creating date buttons {.smaller}
 
@@ -1439,6 +1515,10 @@ date_buttons = [
 {'count': 6, 'label': "6WTD", 'step': "day", 'stepmode': "backward"},
 {'count': 1, 'label': "YTD", 'step': "year", 'stepmode': "todate"}]
 ```
+
+::: notes
+
+:::
 
 ## Creating date buttons {.smaller}
 
@@ -1456,6 +1536,10 @@ fig = px.line(
 )
 ```
 
+::: notes
+
+:::
+
 ## Creating date buttons
 
 ```{python}
@@ -1467,6 +1551,10 @@ fig.update_layout(dict(
 
 fig.show()
 ```
+
+::: notes
+
+:::
 
 # Thank you
 
