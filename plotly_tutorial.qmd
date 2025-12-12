@@ -26,7 +26,7 @@ execute:
 -  Buttons
 
 ::: notes
-Hello everyone. Welcome to Data Science for everyone. Today we're diving into interactive visualization using Plotly in Python.
+Hello everyone. Welcome to Data Science for everyone. Today I am going to teach you interactive visualizations using Plotly in Python.
 
 I will start with the basics of plotly, the move on to customization and annotations, I will show you how to make subplots with layering and I will end by showing you how to place buttons on your plots—let's get started!
 :::
@@ -140,7 +140,7 @@ fig.show()
 :::
 
 ::: notes
-To add a title to the plot, we can call the title argument inside bar and place our desired title in quotes.
+To add a title to the plot, we can call the title argument and place our desired title in quotes.
 :::
 
 ## A `pandas` dataframe
@@ -212,7 +212,7 @@ print(fig)
 ```
 
 ::: notes
-Let's peek under the hood to understand how Plotly structures its figures. Every figure has three core components. First is layout—this dictionary holds all the styling attributes like fonts, colors, and axis properties. Each figure has exactly one layout. Next is data—this is actually a list of dictionaries that sets up the type of graph and the data to display. where each entry defines a trace. The combination of data and type is called a trace. One can have multiple traces per plot. We will look at traces later in the tutorial.
+Let's peek under the hood to understand how Plotly structures its figures. Every figure has two core components. First is layout—this dictionary holds all the styling attributes like fonts, colors, and axis properties. Each figure has exactly one layout. Next is data—this is actually a list of dictionaries that sets up the type of graph and the data to display. where each entry defines a trace. The combination of data and type is called a trace. One can have multiple traces per plot. We will look at traces later in the tutorial.
 :::
 
 ## Plotly is interactive
@@ -220,7 +220,7 @@ Let's peek under the hood to understand how Plotly structures its figures. Every
 ![](images/buttons.png)
 
 ::: notes
-Every plot we create automatically comes with built-in interactive features on the top right hand side. When we hover over any data point, a tooltip pops up showing the exact values. These buttons let us download your plot as a static image, zoom into specific regions, pan around, select data points, and even toggle between different view modes. All of this functionality is included by default—we don't have to write a single extra line of code.
+Every plot we create automatically comes with built-in interactive features. When we hover over any data point, a tooltip pops up showing the exact values. There are buttons on the top right hand side of each plot tha let us download your plot as a static image, zoom into specific regions, pan around, select data points, and even toggle between different view modes. All of this functionality is included by default—we don't have to write a single extra line of code.
 :::
 
 # Univariate visualizations
@@ -293,12 +293,12 @@ fig.show()
 :::
 
 ::: notes
-There are a few handy options you can pass to the histogram function to customize how it behaves. For example, we can change the number of bins using the nbin argument. I have set the nbins to 20.If you want even more control over binning and appearance, the Plotly documentation is a great place to explore further. We will look at customization later in the tutorial.
+There are a few handy options we can pass to the histogram function to customize how it behaves. For example, we can change the number of bins using the nbin argument. I have set the nbins to 20.If you want even more control over binning and appearance, the Plotly online documentation is a great place to explore further. We will look at customization later in the tutorial.
 :::
 
 ## Box plots
 
-![](images/buttons.png)
+![](images/boxplot.png)
 
 ::: notes
 Another common visualization plot for univariate data is boxplot. A boxplot squeezes a lot of distribution information into a compact shape. The main box spans from the first quartile up to the third quartile, showing the middle 50% of the data, with a line in the middle that marks the median. The whiskers extend toward the lower and upper values, but they typically stop before extreme points, which show up as separate dots and are treated as potential outliers based on a standard rule involving the interquartile range.
@@ -380,7 +380,7 @@ fig.show()
 ::::
 
 ::: notes
-With the hover_data argument, we can include extra columns so that hovering over a point reveals the corresponding species or other details. As we can see I have set the hover data argument to species. Now if we hover our mouse over any point it gives us the species name along with the sepal width values.
+With the hover_data argument, we can include extra columns such as species so that hovering over a point reveals the corresponding species or other details. As we can see I have set the hover data argument to species. Now if we hover our mouse over any point it gives us the species name along with the sepal width values.
 :::
 
 ## Boxplots
@@ -397,13 +397,13 @@ fig.show()
 :::
 
 ::: notes
-Setting x to Species we can brake down the boxplot into three species. As we can see versicolor species has the smallest sepal widths among the three species.
+Setting x argument to Species we can brake down the boxplot into three species of iris flowers. We can see versicolor species has the smallest sepal widths among the three.
 :::
 
 # Customizing colors
 
 ::: notes
-Before looking at bivariate plots lets look at how we can use colors in our plots.
+So far we have looked at univariate visualizations. Soon we will look at bivariate plots. But before lets look at how we can use colors in our plots.
 :::
 
 ## Adding color scales
@@ -429,7 +429,7 @@ fig.show()
 :::
 
 ::: notes
-Here we are looking at a bar plot we made at the beginning which tracks sleep hours for three days of the week. We have added a color argument and set it to day which will color each bar based the day. Just like that we can add colors to our plots. Plotly automatically assigns a unique color to every category in that column, or generates a gradient scale if the column is numerical. But we can customize color scales however we want.
+Here we are looking at a bar plot we made at the beginning which tracks sleep hours for three days of the week. We have added a color argument and set it to day which will color each bar based on the day. Just like that we can add colors to our plots. Plotly automatically assigns a unique color to every category in that column, or generates a gradient scale if the column is numerical. But we can customize color scales however we want.
 :::
 
 ## Customize color scales
@@ -469,7 +469,7 @@ my_colors = {
 :::
 
 ::: notes
-We can also make the color dictionary separately. Here i have created the same dictionary and called it my colors.
+We can also make the color dictionary separately. Here i have created the same dictionary and named it my colors.
 :::
 
 ## Customize color scales
@@ -494,12 +494,12 @@ fig.show()
 :::
 
 ::: notes
-Here I have used this dictionary inside the box plot. So far we have looked at colors to map discrete variables. What if we are dealing with numbers instead of categories?
+I have used this dictionary inside the box plot. So far we have looked at colors to map discrete variables. What if we are dealing with numbers instead of categories?
 :::
 
 ## Preset colors {.smaller}
 
-:::{.detective data-detective-search="inferno"}
+:::{.detective data-detective-search="color_continuous_scale"}
 ```{python}
 fig = px.bar(
   data_frame = sleep,
@@ -514,12 +514,12 @@ fig.show()
 :::
 
 ::: notes
-For this, we use the color_continuous_scale argument. This lets us apply smooth gradients rather than distinct categories. Plotly has fantastic built-in scales. Let's color our chart by sleep_hours using the "Viridis" scale. It maps low sleep hour values to dark purple which is Tuesday and high sleep hour values to bright yellow which is Wednesday. You can find a huge list of these named scales in the plotly documentation online.
+For this, we use the color_continuous_scale argument. This lets us apply smooth gradients rather than distinct categories. Plotly has fantastic built-in library of colors. Let's color our chart by sleep_hours using the "Viridis" scale. It maps low sleep hour values to dark purple which is Tuesday and high sleep hour values to bright yellow which is Wednesday. You can find a huge list of these named scales in the plotly documentation online.
 :::
 
 ## Customize color scales {.smaller}
 
-:::{.detective data-detective-search="custom_color"}
+:::{.detective data-detective-search="custom_color, color_continuous_scale"}
 ```{python}
 custom_color = [
   ("rgb(0, 0, 255)"),
@@ -545,7 +545,7 @@ We can also make the color dictionary separately and use it with the color_conti
 # Bivariate visualizations
 
 ::: notes
-Now lets look at bivariate visualizations. Bivariate visualizations are visualizations on datasets that have two variables. Lets focus on three most common plots types for bivariate data visualizations. The first is a scatter plot.
+Now lets look at bivariate visualizations. Bivariate visualizations are visualizations on two variables. Lets focus on a couple of most common plots types for bivariate data visualizations. The first is a scatter plot.
 :::
 
 ## Scatter plots
@@ -562,7 +562,7 @@ fig.show()
 :::
 
 :::notes
-Let's start with the classic scatter plot. This plot relies on a Cartesian system: we have an X-axis representing your first variable and a Y-axis for the second. Wherever those two values meet for a single data point, we place a marker. For instance, here we have a scatter plot using the scatter function that looks at sepal and petal lengths of iris flowers. We can see that as sepal length increases so does the respective petal lengths.
+Scatter plots relies on a Cartesian system: we have an X-axis representing our first variable and a Y-axis for the second. Wherever those two values meet for a single data point, a marker is placed. For instance, here we have a scatter plot using the scatter function that looks at sepal and petal lengths of iris flowers. From this scatter plot we can conclude that as sepal length increases so does the respective petal lengths.
 :::
 
 ## Symbols
@@ -580,7 +580,7 @@ fig.show()
 :::
 
 ::: notes
-Plotly lets you customize this even further. We can also map a categorical column to the 'symbol' argument. This changes the dots into squares or diamonds depending on the category. I have set it to the species."
+Plotly lets you customize scatter plots even further. We can map a categorical column to the 'symbol' argument. This changes the dots into squares or diamonds depending on the category. I have set it to the species.
 :::
 
 ## Adding colors with symbols
@@ -619,7 +619,7 @@ fig.show()
 :::
 
 ::: notes
-We can overlay our plot with a trendline. Trendlines could be linear or non-linear in nature. Here we have used ols or ordinary least squares trendline which is a linear regression line. Other types of trendlines could be use as well such as lowess or moving averages.
+We can overlay scatter plots with trendlines. Trendlines could be linear or non-linear in nature. Here we have used ols or ordinary least squares trendline which is a linear regression line. Other types of trendlines could be use as well such as lowess or moving averages.
 :::
 
 ## Line plot
@@ -638,7 +638,7 @@ fig.show()
 :::
 
 ::: notes
-The second type of bivariate plot is a line plot. These are your go-to for tracking changes over a period. Line plots are simple to make using the line function in plotly. Here we are looking microsoft stocks from the stocks dataset. The x axis is set to date and y axis is set to the stock value over time.
+The second type of bivariate plot is a line plot. These are your go-to for tracking changes over time. Line plots are simple to make using the line function in plotly. Here we are looking microsoft stocks from the stocks dataset. The x axis is set to date and y axis is set to the stock value over time.
 :::
 
 
