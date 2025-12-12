@@ -646,7 +646,7 @@ The second type of bivariate plot is a line plot. These are your go-to for track
 
 
 ::: notes
-Now, what if you want to check relationships between many variables at once? That is where correlation plots come in. For correlation plots we need a statistical parameter called the Correlation Coefficient. Ideally, it gives us a number between negative one and positive one. Explain correlation coefficient and corr function.
+Now, what if you want to check relationships between many variables at once? That is where correlation plots come in. For correlation plots we need a statistical parameter called the Correlation Coefficient. It gives us a number between negative one and positive one. Lets see how to make a correlation plot.
 :::
 
 
@@ -654,10 +654,10 @@ Now, what if you want to check relationships between many variables at once? Tha
 
 :::{.detective data-detective-search="drop"}
 ```{python}
-#| eval: false
 #| output-location: default
 # Remove species column from iris dataset
 iris_2 = iris.drop("Species", axis = 1)
+print(iris_2)
 ```
 :::
 
@@ -665,7 +665,7 @@ iris_2 = iris.drop("Species", axis = 1)
 Let's analyze a iris dataset. We want to see how petal and sepal length and widths relate to each other. The dataframe must have all numerical variables and no categorical variable. The iris dataset has one categorical variable called species. We have to remove that column first. To do that we will use the drop  function and set axis argument to 1. This removes the Species column.
 :::
 
-## Correlation plot
+## Correlation coefficient matrix
 
 :::{.detective data-detective-search="corr"}
 ```{python}
@@ -695,7 +695,7 @@ fig.show()
 :::
 
 ::: notes
-Numbers in a grid can be hard to read, so let's visualize it with a heatmap using the function called imshow. We pass our new correlation matrix into it. And we get a correlation matrix plot.
+Now let's visualize it with a heatmap using the function called imshow. We pass our new correlation matrix into it. And we get a correlation matrix plot.
 :::
 
 ## Correlation plot
@@ -711,7 +711,7 @@ fig.show()
 :::
 
 ::: notes
-Setting text_auto to True displays the actual numbers in the boxes.
+We can Set text_auto to True to display the actual numbers in the boxes.
 :::
 
 ## Correlation plot
@@ -746,13 +746,13 @@ fig.show()
 :::
 
 ::: notes
-Additionally we can fixed the min-max values to -1 and 1 using the zmax and zmin arguments, ensuring proper color representation of correlation strength.
+Additionally we can fixed the min-max values to -1 and 1 using the zmin and zmax arguments, ensuring proper color representation of correlation strength.
 :::
 
 # Customizing plots
 
 ::: notes
-If you guys are still with me please like and subsribe to my channel. It helps me a lot. Next we’re going to level up our visualizations by mastering the art of interaction. We are diving into how to customize those pop-up hover details and fine-tune our chart legends to tell a better story.
+Next we’re going to level up our visualizations by mastering the art of interaction. We are diving into how to customize those pop-up hover details and fine-tune our chart legends to tell a better story.
 :::
 
 ## Hover information
@@ -781,7 +781,7 @@ fig.show()
 ::::
 
 ::: notes
-Lets take a look at this scatter plot. Hovering our mouse on any of these points we can look at the respective sepal and petal lengths. However we dont know which species the points represent.
+Lets take a look at this scatter plot. Hovering our mouse on any of these points it displays the respective sepal and petal lengths. However we dont know which species the points represent.
 :::
 
 ## Hover information
@@ -878,7 +878,7 @@ fig.show()
 ::::
 
 ::: notes
-We can style the hover labels using the hoverlabel argument. This takes a dictionary where we can tweak things like the font family, background color, or border. There is a more complex method called hovertemplate for full HTML control which you will be able to find in the online documentation of plotly.
+We can style the hover labels using the hoverlabel argument. This takes a dictionary where we can tweak things like the font family or background color. There is a more complex method called hovertemplate for full HTML control which you will be able to find in the online documentation of plotly.
 :::
 
 # Legends
@@ -933,7 +933,7 @@ my_legend = dict(
 :::
 
 ::: notes
-To position it, we use the legend dictionary with x and y coordinates. These aren't pixels; they are normalized coordinates between 0 and 1. We can also set a background color. As always, the documentation has a full list of properties that you can look at.
+To position it, we provide the legend dictionary with x and y coordinates. These aren't pixels; they are normalized coordinates between 0 and 1. We can also set a background color. As always, the documentation has a full list of properties that you can look at.
 :::
 
 ## Style plot legend
@@ -983,6 +983,7 @@ fig = px.bar(
   title = "Hours of sleep",
   color = "day"
 )
+fig.show()
 ```
 
 ::: notes
@@ -1132,7 +1133,7 @@ msg = dict(
     size=20, 
     color="white"
   ),
-  bgcolor="rgb(237, 64, 200)", 
+  bgcolor="rgba(64, 237, 104, 1)", 
   showarrow=False
 )
 ```
@@ -1371,6 +1372,7 @@ To merge them, we use add_trace to pull the trace from the histogram using .data
 
 ## Stacked subplots {.smaller}
 
+:::{.detective data-detective-search="subplot_titles"}
 ```{python}
 fig = make_subplots(
     rows=3, cols=1,
@@ -1378,9 +1380,10 @@ fig = make_subplots(
       ['Setosa', 'Versicolor', 'Virginica']
 )
 ```
+:::
 
 ::: notes
-Now let's try something more advanced. Suppose we want to separate plot for each iris flower species: setosa, versicolor, and virginica. Instead of writing code three times, we set up a grid with 3 row and 1 columns. For individual subplot titles we input a list of the three species to the subplot titles argument. We loop through our list of star types, filter the dataframe for that specific star, and generate a scatter plot. Inside the loop, we add that scatter trace to the correct column. It works, but notice how the axes are all scaled differently? It makes direct comparison pretty tricky."
+Let's try something more advanced. Suppose we want separate plots for each iris flower species: setosa, versicolor, and virginica. Instead of writing code three times, we set up a grid with 3 row and 1 columns. For individual subplot titles we input a list of the three species to the subplot titles argument.
 :::
 
 ## Stacked subplots {.smaller}
@@ -1492,7 +1495,7 @@ line_fig = px.line(
 :::
 
 ::: notes
-Next we generate two plots: one is a scatter plot for Boston and the other is a line plot for Houston.
+We generate two plots: one is a scatter plot for Boston and the other is a line plot for Houston.
 :::
 
 ## Layering plots
@@ -1506,7 +1509,7 @@ combined_fig.update_layout(title='USA city temperatures')
 :::
 
 ::: notes
-Finally, we fuse them together by creating a new combined figure that unpacks the data from both the scatter and line charts using the star operator.
+Finally, we fuse them together by creating a new combined figure that unpacks the data from both the scatter and line charts using the star operator. If you dont know what a star operator is i highly recommend you to watch my video on Iterators and comprehensions. The link is in the decription below.
 :::
 
 ## Adding more layers
@@ -1521,7 +1524,7 @@ line_fig_seattle = px.line(
 ```
 
 ::: notes
-We don't always have to build everything at once. Sometimes we might have an existing chart and we want to add a new metric onto it later. Lets add the seattle weather to our figure. As always we make a new line chart with the seattle weather.
+We don't always have to build everything at once. Sometimes we might have an existing chart and we want to add that new metric to our plot. Lets add the seattle weather to our figure. First, we make a new line chart with the seattle weather.
 :::
 
 ## Adding more layers
@@ -1625,7 +1628,7 @@ We first generate our line plot with the weather data for Boston from the weathe
 :::{.detective data-detective-search="rangeselector"}
 ```{python}
 #| output-location: slide
-#| echo: false
+
 fig.update_layout(dict(
     xaxis=dict(
       rangeselector=dict(buttons=date_buttons)
