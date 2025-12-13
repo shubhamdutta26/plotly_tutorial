@@ -644,6 +644,10 @@ The second type of bivariate plot is a line plot. These are your go-to for track
 
 ## Correlation plot
 
+```{python}
+#| output-location: default
+print(iris)
+```
 
 ::: notes
 Now, what if you want to check relationships between many variables at once? That is where correlation plots come in. For correlation plots we need a statistical parameter called the Correlation Coefficient. It gives us a number between negative one and positive one. Lets see how to make a correlation plot.
@@ -1627,8 +1631,8 @@ We first generate our line plot with the weather data for Boston from the weathe
 
 :::{.detective data-detective-search="rangeselector"}
 ```{python}
-#| output-location: slide
-
+#| output-location: default
+#| eval: false
 fig.update_layout(dict(
     xaxis=dict(
       rangeselector=dict(buttons=date_buttons)
@@ -1637,6 +1641,10 @@ fig.update_layout(dict(
 fig.show()
 ```
 :::
+
+## Creating date buttons
+
+![](images/buttons_2.png)
 
 ::: notes
 Now we merge the buttons and the plot together. To inject the buttons, we access the update_layout method. Inside there, we target the xaxis and specifically the rangeselector property. We simply pass our list of button dictionaries into the buttons argument, and Plotly handles the rendering logic for us.
